@@ -352,7 +352,7 @@ def upload(current_user, user_id, pet_id):
 @bp.route('/<int:user_id>/pets/<int:pet_id>/view', methods = ['GET'])
 @cross_origin()
 @token_required
-def upload(current_user, user_id, pet_id):
+def view(current_user, user_id, pet_id):
     if current_user.id != user_id:
         return jsonify({'message': 'Cannot perform that function'})
     

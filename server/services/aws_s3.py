@@ -80,12 +80,11 @@ def upload_file_to_s3(file, bucket = BUCKET_NAME):
     return {"url": f"{S3_LOCATION}{file.filename}"}
 
 def get_image_url(bucket, filename):
-    s3_client = boto3.client('s3')
     presigned_url = ''
     try:
-        for item in s3_client.list_objects(Bucket=bucket)['Contents']:
+        for item in s3.list_objects(Bucket=bucket)['Contents']:
             if item['Key'] == f'uploads/{filename}': # unique filename
-                presigned_url = s3_client.generate_presigned_url('get_object', Params = {'Bucket': bucket, 'Key': item['Key']}, ExpiresIn = 100)
+                presigned_url = s3.generate_presigned_url('get_object', Params = {'Bucket': bucket, 'Key': item['Key']}, ExpiresIn = 100)
                 break
     except Exception as e:
         pass
