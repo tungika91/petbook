@@ -348,3 +348,23 @@ def upload(current_user, user_id, pet_id):
         db.session.add(img)
         db.session.commit()
         return {"url": url, "filename": image.filename}
+    
+@bp.route('/<int:user_id>/pets/<int:pet_id>/view', methods = ['GET'])
+@cross_origin()
+@token_required
+def upload(current_user, user_id, pet_id):
+    if current_user.id != user_id:
+        return jsonify({'message': 'Cannot perform that function'})
+    
+    if request.method == 'GET':
+        # Get profile pic
+        image_urls = []
+        images = Img.query.filter(Img.pet_id==pet_id).all()
+        if not images:
+            return jsonify({"response": f"pet has no images"}), 404
+        else:
+            for image in images:
+                results = get_image_url(BUCKET, image.img_filename)
+                image_urls.append(results)
+        
+        return image_urls
