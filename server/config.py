@@ -4,8 +4,8 @@ load_dotenv()
 
 EMAIL = os.environ.get("GMAIL_EMAIL")
 PASSWORD = os.environ.get("GMAIL_PASSWORD")
-# SQLALCHEMY_DATABASE_URI = os.environ.get("ELEPHANTSQL_URI") # toggle to PROGRESQL_URI for local database
-SQLALCHEMY_DATABASE_URI = os.environ.get("PROGRESQL_URI") # toggle to PROGRESQL_URI for local database
+SQLALCHEMY_DATABASE_URI = os.environ.get("ELEPHANTSQL_URI") # toggle to PROGRESQL_URI for local database
+# SQLALCHEMY_DATABASE_URI = os.environ.get("PROGRESQL_URI") # toggle to PROGRESQL_URI for local database
 BUCKET = os.environ.get("BUCKET_NAME")
 
 class Config(object):

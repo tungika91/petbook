@@ -7,6 +7,7 @@ from flask_cors import cross_origin
 from auth_middleware import token_required
 from services.aws_s3 import allowed_file, get_unique_filename, upload_file_to_s3, get_image_url
 from datetime import datetime, timedelta
+import requests
 import jwt
 
 bp = Blueprint('users', __name__, url_prefix='/users')

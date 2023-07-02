@@ -175,7 +175,7 @@ export const DataProvider = ({ children }) => {
             handleSubmit, petName, setPetName, petType, setPetType, dob, setDob, deworm, setDeworm, gender, setGender, ster, setSter, petDesc, setPetDesc,
             pets, handleDelete, sendEmail,
             handleEdit, newPetName, setNewPetName, newPetType, setNewPetType, newDob, setNewDob, newDeworm, setNewDeworm, newGender, setNewGender, newSter, setNewSter, newPetDesc, setNewPetDesc,
-            user, setUser, pwd, setPwd, userID, setUserID, auth, setAuth, picURL, setPicURL, email, setEmail
+            user, setUser, pwd, setPwd, userID, setUserID, auth, setAuth, picURL, setPicURL, email, setEmail, navigate
         }}>
             {children}
         </DataContext.Provider>

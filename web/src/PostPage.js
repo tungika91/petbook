@@ -45,7 +45,7 @@ const PostPage = () => {
                             <li className="postBody">Birthday: {pet.pet_dob.slice(0, 16)}</li>
                             <li className="postBody">Last deworm date: {pet.last_deworm.slice(0, 16)}</li>
                             <li className="postBody">Age: {pet.pet_age}</li>
-                            <li className="postBody">Sterilised: {(pet.sterilised).toString()}</li>
+                            <li className="postBody">Sterilised: {(pet.sterilised) ? 'Yes': 'No'}</li>
                             <li className="postBody">Pet Type: {pet.pet_type}</li>
                             <li className="postBody">Description: {pet.pet_description}</li>
 
@@ -58,7 +58,8 @@ const PostPage = () => {
                             <div>
                                 <ImageUpload pet_id = {pet.id}/>
                             </div>
-                        </> ) : (
+                        </> ) 
+                        : (
                         <>
                             <h2>Pet Not Found</h2>
                             <p>

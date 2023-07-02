@@ -5,29 +5,30 @@ import api from './api/posts';
 
 
 const ImageUpload = ({ pet_id }) => {
-    const { userID, auth } = useContext(DataContext);
+    const { userID, auth, navigate } = useContext(DataContext);
     const [file, setFile] = useState();
 
     const handleFile = (e) => {
-        console.log(e.target.files[0])
-        setFile(e.target.files[0])
+        console.log(e.target.files[0]);
+        setFile(e.target.files[0]);
     }
 
     const handleUpload = async (e) => {
-        const formData = new FormData()
-        formData.append('file', file)
+        const formData = new FormData();
+        formData.append('file', file);
         const response = await api.post(`${userID}/pets/${pet_id}/upload`, formData, {
             headers: {
                 'x-access-token': auth.accessToken
             }
-        })
-        console.log(response.data)
+        });
+        console.log(response.data);
+        navigate('/');
     }
 
     return (
         <div>
             <input class="file-upload" type="file" name='file' onChange={(e) => handleFile(e)}/>
-            <button class="file-upload" onClick={handleUpload}> Upload </button>
+            <button onClick={handleUpload}> Upload </button>
         </div>
     )
 }
