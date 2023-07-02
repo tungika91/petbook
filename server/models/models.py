@@ -40,6 +40,8 @@ class Pet(db.Model):
     deworm_reminder = db.Column(db.Boolean)
     sterilised = db.Column(db.Boolean)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    profile_pics = relationship("Img", cascade="all,delete,delete-orphan")
+
 
     def __repr__(self):
         return "<Pet %r>" % self.pet_name
