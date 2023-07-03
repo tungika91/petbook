@@ -1,13 +1,13 @@
 import Layout from './Layout';
 import Home from './Home';
-import NewPet from './NewPet';
+import NewPet from './pets/NewPet';
 import PostPage from './PostPage';
-import EditPet from './EditPet';
+import EditPet from './pets/EditPet';
 import About from './About';
 import Missing from './Missing';
-import Login from './Login';
-import Register from './Register';
-import RequireAuth from './RequireAuth';
+import Login from './login/Login';
+import Register from './login/Register';
+import RequireAuth from './login/RequireAuth';
 import { Route, Routes } from 'react-router-dom';
 import { DataProvider } from './context/DataContext';
 

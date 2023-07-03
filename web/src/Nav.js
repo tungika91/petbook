@@ -12,7 +12,7 @@ const Nav = () => {
                     id="search" // to match with htmlFor
                     type="text" // text input
                     placeholder="Search Pets"
-                    value={search}
+                    value={ search }
                     onChange={(e) => setSearch(e.target.value)}
                 />
             </form>

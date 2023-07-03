@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { useContext } from 'react';
-import DataContext from './context/DataContext';
+import DataContext from '../context/DataContext';
 
 export const EditPet = () => {
     const { pets, handleEdit, newPetName, setNewPetName, newPetType, setNewPetType, newDob, setNewDob, newDeworm, setNewDeworm, newGender, setNewGender, newSter, setNewSter, newPetDesc, setNewPetDesc } = useContext(DataContext);

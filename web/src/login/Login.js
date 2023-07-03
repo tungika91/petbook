@@ -1,13 +1,11 @@
 import { useRef, useState, useEffect, useContext } from 'react';
-import DataContext from './context/DataContext';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
-// import AuthContext from "./context/AuthProvider";
+import DataContext from '../context/DataContext';
+import { useNavigate, useLocation } from 'react-router-dom';
+import axios from '../api/axios';
 
-import axios from './api/axios';
 const LOGIN_URL = '/login';
 
 const Login = () => {
-    // const { setAuth } = useContext(AuthContext);
     const userRef = useRef();
     const errRef = useRef();
 
@@ -33,7 +31,6 @@ const Login = () => {
                 JSON.stringify({ username: user, password: pwd }),
                 {
                     headers: { 'Content-Type': 'application/json' },
-                    // withCredentials: true
                 }
             );
             console.log(JSON.stringify(response?.data))
@@ -89,7 +86,6 @@ const Login = () => {
                 <p>
                     Need an Account?<br />
                     <span className="line">
-                        {/*put router link here*/}
                         <a href="register">Sign Up</a>
                     </span>
                 </p>

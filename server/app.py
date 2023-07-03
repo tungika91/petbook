@@ -1,7 +1,6 @@
 from flask import Flask
 from flask import Flask, jsonify
 import routes.users as users
-import routes.pets as pets
 from extensions import db, mail, migrate, cors
 from config import DevelopmentConfig
 
@@ -9,7 +8,6 @@ app = Flask(__name__)
 
 # List of blueprints
 app.register_blueprint(users.bp)
-app.register_blueprint(pets.bp)
 
 # App Config
 app.config.from_object(DevelopmentConfig)

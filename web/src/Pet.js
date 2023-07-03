@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-const Post = ({ pet }) => {
+const Pet = ({ pet }) => {
     return (
         <div className="card">
             <div></div>
@@ -15,14 +15,8 @@ const Post = ({ pet }) => {
                 </Link>
                 <span>{pet.pet_type}</span>
             </div>
-
-            {/* <p className="postBody">{
-                (pet.pet_description).length <= 25
-                    ? pet.pet_description
-                    : `${(pet.pet_description).slice(0, 25)}...`
-            }</p> */}
         </div>    
     )
 }
 
-export default Post
+export default Pet

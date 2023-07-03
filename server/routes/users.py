@@ -12,7 +12,7 @@ import jwt
 
 bp = Blueprint('users', __name__, url_prefix='/users')
 
-# ------------------- Sign-up and Log-in Section ------------------- #
+# ------------------- REGISTRATION and LOGIN ------------------- #
 
 @bp.route('/register', methods = ['POST'])
 @cross_origin()
@@ -66,13 +66,12 @@ def login():
             error = 'Unknown Error'
             return {"status": f"{error}"}, 401
 
-# ------------------- Users & Pets Section ------------------- #
+# ------------------- USERS & PETS ------------------- #
 @bp.route('/', methods = ['GET'])
 @cross_origin()
 def all_users():
     all_users = []
     users = User.query.all()
-    # pets = Pet.query.filter(Pet.pet_name=="Loki").all()
 
     for user in users:
         results = {

@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import DataContext from './context/DataContext';
+import DataContext from '../context/DataContext';
 
 const NewPet = () => {
     const {handleSubmit, petName, setPetName, petType, setPetType, dob, setDob, deworm, setDeworm, gender, setGender, ster, setSter, petDesc, setPetDesc} = useContext(DataContext)

@@ -1,12 +1,11 @@
 import { useRef, useState, useEffect, useContext } from 'react';
-import DataContext from './context/DataContext';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
-// import AuthContext from "./context/AuthProvider";
+import DataContext from '../context/DataContext';
+import { useNavigate } from 'react-router-dom';
 
-import axios from './api/axios';
+import axios from '../api/axios';
 const REGISTER_URL = '/register';
 
-const Login = () => {
+const Register = () => {
     // const { setAuth } = useContext(AuthContext);
     const userRef = useRef();
     const errRef = useRef();
@@ -97,4 +96,4 @@ const Login = () => {
     )
 }
 
-export default Login
+export default Register

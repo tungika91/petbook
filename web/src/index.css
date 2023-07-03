@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i");
+@import url("https://fonts.googleapis.com/css?family=Helvetica Neue:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i");
 
 * {
   margin: 0;
@@ -12,7 +12,7 @@ html {
 
 body {
   /* min-height: 100vh; */
-  font-family: "Roboto", sans-serif;
+  font-family: "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   display: flex;
@@ -76,7 +76,7 @@ body {
 }
 
 .searchForm input[type="text"] {
-  font-family: "Roboto", sans-serif;
+  font-family: "Helvetica Neue", sans-serif;
   width: 100%;
   min-height: 48px;
   font-size: 1rem;
@@ -176,7 +176,7 @@ body {
 
 .newPostForm input[type='text'], 
 .newPostForm textarea {
-  font-family: "Roboto", sans-serif;
+  font-family: "Helvetica Neue", sans-serif;
   width: 100%;
   min-height: 48px;
   font-size: 1rem;
@@ -282,7 +282,7 @@ body {
 }
 
 html {
-    font-family: "Roboto", sans-serif;
+    font-family: "Helvetica Neue", sans-serif;
     font-size: 22px;
     color: #000;
 }
@@ -321,7 +321,7 @@ input[type="text"],
 input[type="password"],
 button,
 textarea {
-  font-family: "Roboto", sans-serif;
+  font-family: "Helvetica Neue", sans-serif;
   font-size: 22px;
   padding: 0.25rem;
   border-radius: 0.5rem;
@@ -473,7 +473,7 @@ img {
 }
 
 .card div:nth-of-type(3) span {
-  font-family: "Roboto", sans-serif;
+  font-family: "Helvetica Neue", sans-serif;
   text-transform: uppercase;
   font-size: 13px;
   letter-spacing: 2px;

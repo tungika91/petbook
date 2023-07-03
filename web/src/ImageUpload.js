@@ -3,7 +3,6 @@ import { useState } from "react";
 import DataContext from './context/DataContext';
 import api from './api/posts';
 
-
 const ImageUpload = ({ pet_id }) => {
     const { userID, auth, navigate } = useContext(DataContext);
     const [file, setFile] = useState();
