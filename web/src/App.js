@@ -1,7 +1,7 @@
 import Layout from './Layout';
 import Home from './Home';
 import NewPet from './pets/NewPet';
-import PostPage from './PostPage';
+import PetDetail from './PetDetail';
 import EditPet from './pets/EditPet';
 import About from './About';
 import Missing from './Missing';
@@ -24,7 +24,7 @@ function App() {
             <Route index element={<Home />} />
             <Route path="post">
               <Route index element={<NewPet />} />
-              <Route path=":id" element={<PostPage />} />
+              <Route path=":id" element={<PetDetail />} />
             </Route>
             <Route path="post/:id/edit">
               <Route index element={<EditPet />} />

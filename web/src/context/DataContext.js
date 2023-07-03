@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect, useRef } from "react";
+import { createContext, useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import { format } from 'date-fns';
 import api from '../api/posts';
@@ -16,7 +16,6 @@ export const DataProvider = ({ children }) => {
     const [user, setUser] = useState('');
     const [pwd, setPwd] = useState('');
     const [userID, setUserID] = useState('');
-    const [email, setEmail] = useState('');
     const [auth, setAuth] = useState({})
 
     // Inputs for Pet in POST
@@ -146,21 +145,7 @@ export const DataProvider = ({ children }) => {
         }
         navigate('/');
     }
-    // ------------------- Send Notification Email (not automated) ------------------- //
-    const API_URL = 'http://127.0.0.1:5000/pets/';
-    const sendEmail = async (id) => {
-        try {
-            const response = api.get(`${API_URL}reminder/${id}/send-email`);
-        } catch (err) {
-            if (err.response) {
-                // Not in the 200 response range
-                console.log(err.response.data);
-                console.log(err.response.status);
-                console.log(err.response.headers);
-            } else { console.log(`Error: ${err.message}`) }
-        }
-        navigate('/');
-    }
+
     // ------------------- Filter Search Results on Home page ------------------- //
     useEffect(() => {
         const filteredResults = pets.filter((pet) =>
@@ -173,9 +158,9 @@ export const DataProvider = ({ children }) => {
             search, setSearch,
             searchResults, setSearchResults,
             handleSubmit, petName, setPetName, petType, setPetType, dob, setDob, deworm, setDeworm, gender, setGender, ster, setSter, petDesc, setPetDesc,
-            pets, handleDelete, sendEmail,
+            pets, handleDelete,
             handleEdit, newPetName, setNewPetName, newPetType, setNewPetType, newDob, setNewDob, newDeworm, setNewDeworm, newGender, setNewGender, newSter, setNewSter, newPetDesc, setNewPetDesc,
-            user, setUser, pwd, setPwd, userID, setUserID, auth, setAuth, picURL, setPicURL, email, setEmail, navigate
+            user, setUser, pwd, setPwd, userID, setUserID, auth, setAuth, picURL, setPicURL, navigate
         }}>
             {children}
         </DataContext.Provider>

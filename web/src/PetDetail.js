@@ -29,7 +29,7 @@ const Button2 = styled.button`
     cursor: pointer;
 `;
 
-const PostPage = () => {
+const PetDetail = () => {
     const { pets, handleDelete } = useContext(DataContext);
     const { id } = useParams(); // id is used in Route
     const pet = pets.find(pet => (pet.id).toString() === id); // === is for string match, == for numeric
@@ -73,4 +73,4 @@ const PostPage = () => {
     )
 }
 
-export default PostPage
+export default PetDetail
