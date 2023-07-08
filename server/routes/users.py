@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify, url_for, redirect
 from werkzeug.security import check_password_hash, generate_password_hash
 from models.models import User, Pet, Img
-from config import BUCKET
+from config import AWS_S3_BUCKET
 from extensions import db
 from flask_cors import cross_origin
 from auth_middleware import token_required
@@ -159,7 +159,7 @@ def all_pets(current_user, user_id):
                     return jsonify({"response": f"pet has no images"}), 404
                 else:
                     for image in images:
-                        results = get_image_url(BUCKET, image.img_filename)
+                        results = get_image_url(AWS_S3_BUCKET, image.img_filename)
                         image_urls.append(results)
                 results = {
                             "id":pet.id,
@@ -207,7 +207,7 @@ def pet(current_user, user_id, pet_id):
                 return jsonify({"response": f"pet has no images"}), 404
             else:
                 for image in images:
-                    results = get_image_url(BUCKET, image.img_filename)
+                    results = get_image_url(AWS_S3_BUCKET, image.img_filename)
                     image_urls.append(results)
 
             results = {
@@ -364,7 +364,9 @@ def view(current_user, user_id, pet_id):
             return jsonify({"response": f"pet has no images"}), 404
         else:
             for image in images:
-                results = get_image_url(BUCKET, image.img_filename)
+                results = get_image_url(AWS_S3_BUCKET, image.img_filename)
                 image_urls.append(results)
         
         return image_urls
+
+# ------------------- MEDICAL RECORDS ------------------- #

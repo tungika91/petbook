@@ -2,6 +2,7 @@ import Layout from './Layout';
 import Home from './Home';
 import NewPet from './pets/NewPet';
 import PetDetail from './PetDetail';
+import PetMedical from './PetMedical';
 import EditPet from './pets/EditPet';
 import About from './About';
 import Missing from './Missing';
@@ -28,6 +29,9 @@ function App() {
             </Route>
             <Route path="post/:id/edit">
               <Route index element={<EditPet />} />
+            </Route>
+            <Route path="post/:id/medical">
+              <Route index element={<PetMedical />} />
             </Route>
             <Route path="about" element={<About />} />
             <Route path="*" element={<Missing />} />

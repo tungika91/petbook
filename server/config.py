@@ -6,7 +6,10 @@ EMAIL = os.environ.get("GMAIL_EMAIL")
 PASSWORD = os.environ.get("GMAIL_PASSWORD")
 SQLALCHEMY_DATABASE_URI = os.environ.get("ELEPHANTSQL_URI") # toggle to PROGRESQL_URI for local database
 # SQLALCHEMY_DATABASE_URI = os.environ.get("PROGRESQL_URI") # toggle to PROGRESQL_URI for local database
-BUCKET = os.environ.get("BUCKET_NAME")
+AWS_ACCESS_KEY = os.environ.get("AWS_ACCESS_KEY")
+AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_ACCESS_SECRET")
+AWS_S3_BUCKET = os.environ.get("AWS_S3_BUCKET")
+AWS_REGION = os.environ.get("AWS_REGION")
 
 class Config(object):
     DEBUG = False

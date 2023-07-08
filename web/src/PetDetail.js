@@ -55,6 +55,8 @@ const PetDetail = () => {
 
                             <Link to={`edit`}><Button2>Edit Pet</Button2></Link>
 
+                            <Link to={`medical`}><Button2>Medical Info</Button2></Link>
+
                             <div>
                                 <ImageUpload pet_id = {pet.id}/>
                             </div>
