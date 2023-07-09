@@ -38,13 +38,23 @@ body {
   box-shadow: 0px 0px 15px gray;
 }
 
-.Header, .Footer {
+.Header {
   width: 100%;
   background-color: #e1b382;
   padding: 1rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.Footer {
+  width: 100%;
+  background-color: #2d545e;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white
 }
 
 .Header h1 {
@@ -204,18 +214,6 @@ body {
 .Missing p, .PostPage p {
   margin-bottom: 1rem;
 }
-
-/* .PostPage button {
-  height: 48px;
-  min-width: 48px;
-  margin-left: 0.5rem;
-  border-radius: 0.25rem;
-  padding: 0.5rem;
-  font-size: 1rem;
-  background-color: red;
-  color: #fff;
-  cursor: pointer;
-} */
 
 .statusMsg {
   margin-top: 2rem;
@@ -407,7 +405,6 @@ img {
 .container {
   width: 100%;
   margin-top: 3rem;
-
   display: flex;
   justify-content: center;
   align-items: center;
@@ -491,4 +488,40 @@ img {
 
 .card:hover div:nth-of-type(3) span {
   color: #000000;
+  background-color: white;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0, 1);
+  box-shadow: 0px 13px 10px -7px rgba(0, 0, 0, 0.1);
+}
+
+.record {
+  width: 80%;
+  height: 12rem;
+  margin: 1rem;
+
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+  border: none;
+  background-color: white;
+
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0, 1);
+  box-shadow: 0px 13px 10px -7px rgba(0, 0, 0, 0.1);
+}
+
+.record:hover {
+  box-shadow: 0px 30px 18px -8px rgba(0, 0, 0, 0.1);
+  transform: scale(1.02, 1.02);
+}
+
+.recordTitle{
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  margin-left: 0.5rem;
+  font-size: x-large;
+}
+
+.recordList {
+  margin-left: 0.5rem;
+  margin-bottom: 0.5rem;
+  font-size: large;
 }

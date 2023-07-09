@@ -1,8 +1,8 @@
 import { useParams, Link } from "react-router-dom";
 import { useContext } from 'react';
-import styled from "styled-components";
 import DataContext from './context/DataContext';
 import ImageUpload from "./ImageUpload";
+import styled from "styled-components";
 
 // -------------- CSS Style -------------- //
 const Button1 = styled.button`
@@ -29,6 +29,18 @@ const Button2 = styled.button`
     cursor: pointer;
 `;
 
+const Button3 = styled.button`
+    height: 48px;
+    min-width: 48px;
+    margin-left: 0.5rem;
+    border-radius: 0.25rem;
+    padding: 0.5rem; 
+    font-size: 1rem;
+    background-color: green;
+    color: white;
+    cursor: pointer;
+`;
+
 const PetDetail = () => {
     const { pets, handleDelete } = useContext(DataContext);
     const { id } = useParams(); // id is used in Route
@@ -37,7 +49,6 @@ const PetDetail = () => {
     return (
         <main className="PostPage">
             <article className="post">
-                {/* if post is true then && ... */}
                 <div>
                     {pet ? (
                         <>
@@ -55,7 +66,7 @@ const PetDetail = () => {
 
                             <Link to={`edit`}><Button2>Edit Pet</Button2></Link>
 
-                            <Link to={`medical`}><Button2>Medical Info</Button2></Link>
+                            <Link to={`medical`}><Button3>Medical Info</Button3></Link>
 
                             <div>
                                 <ImageUpload pet_id = {pet.id}/>

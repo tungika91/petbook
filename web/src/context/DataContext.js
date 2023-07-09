@@ -152,7 +152,7 @@ export const DataProvider = ({ children }) => {
             ((pet.pet_name).toLowerCase()).includes(search.toLowerCase()));
         setSearchResults(filteredResults.reverse());
     }, [pets, search])
-    
+
     return (
         <DataContext.Provider value={{
             search, setSearch,

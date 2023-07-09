@@ -7,8 +7,8 @@ from flask_cors import cross_origin
 from auth_middleware import token_required
 from services.aws_s3 import allowed_file, get_unique_filename, upload_file_to_s3, get_image_url
 from datetime import datetime, timedelta
-import requests
 import jwt
+import controller as dynamodb
 
 bp = Blueprint('users', __name__, url_prefix='/users')
 
@@ -370,3 +370,78 @@ def view(current_user, user_id, pet_id):
         return image_urls
 
 # ------------------- MEDICAL RECORDS ------------------- #
+
+@bp.route('/<int:user_id>/pets/<int:pet_id>/medical', methods=['POST'])
+@cross_origin()
+@token_required
+def add_medical(current_user, user_id, pet_id):
+    if current_user.id != user_id:
+        return jsonify({'message': 'Cannot perform that function'})
+    
+    data = request.get_json()
+    response = dynamodb.write_to_medical(
+        data['id'], 
+        pet_id, 
+        data['date'], 
+        data['clinic'], 
+        data['address'],
+        data['phone'],
+        data['doctor'],
+        data['agenda'])   
+    if (response['ResponseMetadata']['HTTPStatusCode'] == 200):
+       return {
+           'msg': 'Add medical successful',
+       }
+    return {
+        'error': response
+    }
+
+@bp.route('/<int:user_id>/pets/<int:pet_id>/medical/all', methods=['GET'])
+@cross_origin()
+@token_required
+def get_all_medical(current_user, user_id, pet_id):
+    if current_user.id != user_id:
+        return jsonify({'message': 'Cannot perform that function'})
+    
+    response = dynamodb.medicalTable.scan()
+    if (response['ResponseMetadata']['HTTPStatusCode'] == 200):
+        records = []
+        for item in response['Items']:
+            if item['pet_id'] == pet_id:
+                records.append(item)
+        return records
+    return {
+        'error': response
+    }
+
+@bp.route('/medical/<int:id>', methods=['DELETE'])
+@cross_origin()
+@token_required
+def delete_medical(current_user, user_id, id):
+    if current_user.id != user_id:
+        return jsonify({'message': 'Cannot perform that function'})
+    response = dynamodb.delete_from_medical(id)
+    if (response['ResponseMetadata']['HTTPStatusCode'] == 200):
+        return {
+            'msg': 'Deleted successfully',
+        }
+    return {
+        'error': response
+    }
+
+@bp.route('/medical/<int:id>', methods=['PATCH'])
+@cross_origin()
+@token_required
+def update_medical(current_user, user_id, id):
+    if current_user.id != user_id:
+        return jsonify({'message': 'Cannot perform that function'})
+    data = request.get_json()
+    response = dynamodb.update_in_medical(id, data)
+    if (response['ResponseMetadata']['HTTPStatusCode'] == 200):
+        return {
+            'msg'                : 'Updated successfully',
+            'ModifiedAttributes' : response['Attributes'],
+        }
+    return {
+        'error': response
+    }
