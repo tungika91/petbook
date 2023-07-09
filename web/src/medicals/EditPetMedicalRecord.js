@@ -9,9 +9,7 @@ export const EditPetMedicalRecord = () => {
 
     // Inputs for Pet in PATCH
     const { medicalRecord, userID, setMedicalRecord, auth } = useContext(DataContext);
-    console.log(medicalRecord);
     const { id, record_id } = useParams(); // extract the id from the link
-    console.log(record_id)
     const record = medicalRecord.find(record => (record.id).toString() === record_id);
     const [newClinic, setNewClinic] = useState('');
     const [newDoctor, setNewDoctor] = useState('');
@@ -48,7 +46,6 @@ export const EditPetMedicalRecord = () => {
                     'x-access-token': auth.accessToken
                 }
             });
-            console.log(response.data)
             // setMedicalRecord(pets.map(pet => (pet.id).toString() === id ? { ...response.data } : pet)) // if pet id matches then update
             navigate(`/post/${id}`)
         } catch (err) {

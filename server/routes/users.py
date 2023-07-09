@@ -9,6 +9,7 @@ from services.aws_s3 import allowed_file, get_unique_filename, upload_file_to_s3
 from datetime import datetime, timedelta
 import jwt
 import controller as dynamodb
+import uuid
 
 bp = Blueprint('users', __name__, url_prefix='/users')
 
@@ -377,10 +378,10 @@ def view(current_user, user_id, pet_id):
 def add_medical(current_user, user_id, pet_id):
     if current_user.id != user_id:
         return jsonify({'message': 'Cannot perform that function'})
-    
+    id = uuid.uuid4()
     data = request.get_json()
     response = dynamodb.write_to_medical(
-        data['id'], 
+        str(id), 
         pet_id, 
         data['date'], 
         data['clinic'], 
@@ -414,13 +415,13 @@ def get_all_medical(current_user, user_id, pet_id):
         'error': response
     }
 
-@bp.route('/medical/<int:id>', methods=['DELETE'])
+@bp.route('/<int:user_id>/pets/<int:pet_id>/medical/<record_id>', methods=['DELETE'])
 @cross_origin()
 @token_required
-def delete_medical(current_user, user_id, id):
+def delete_medical(current_user, user_id, pet_id, record_id):
     if current_user.id != user_id:
         return jsonify({'message': 'Cannot perform that function'})
-    response = dynamodb.delete_from_medical(id)
+    response = dynamodb.delete_from_medical(record_id)
     if (response['ResponseMetadata']['HTTPStatusCode'] == 200):
         return {
             'msg': 'Deleted successfully',
@@ -429,7 +430,7 @@ def delete_medical(current_user, user_id, id):
         'error': response
     }
 
-@bp.route('/<int:user_id>/pets/<int:pet_id>/medical/<int:record_id>', methods=['PATCH'])
+@bp.route('/<int:user_id>/pets/<int:pet_id>/medical/<record_id>', methods=['PATCH'])
 @cross_origin()
 @token_required
 def update_medical(current_user, user_id, pet_id, record_id):

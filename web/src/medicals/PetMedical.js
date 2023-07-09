@@ -38,7 +38,6 @@ const PetMedical = () => {
             ? medicalRecord.map(record => (
                 <PetMedicalRecord record={record} key={record.id} />))
             : "Missing Record"}
-            <button>New Record</button>
         </div>
     )
 }

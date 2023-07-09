@@ -1,6 +1,26 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useContext } from 'react';
+import DataContext from '../context/DataContext';
+import api from '../api/posts';
 
 const PetMedicalRecord = ({ record }) => {
+    const { userID, auth } = useContext(DataContext);
+    const { id } = useParams(); // extract the id from the link
+    const navigate = useNavigate();
+
+    const handleMedicalDelete = async () => {
+        try {
+            await api.delete(`${userID}/pets/${id}/medical/${record.id}`, {
+                headers: {
+                    'x-access-token': auth.accessToken
+                }
+            });
+            navigate(`/post/${id}/medical`)
+        } catch (err) {
+            console.log(`Error: ${err.message}`)
+        }
+        navigate('/');
+    }
     return (
         <>
             <div className="record">
@@ -15,7 +35,7 @@ const PetMedicalRecord = ({ record }) => {
             <Link to={`${record.id}/edit`}>
                 <button>Edit</button>
             </Link>
-            <button>x</button>
+            <button onClick={()=>handleMedicalDelete()}>x</button>
         </>
     )
 }

@@ -24,7 +24,7 @@ def create_table_medical():
         AttributeDefinitions = [
             {
                 'AttributeName': 'id', # Name of the attribute
-                'AttributeType': 'N'   # N = Number (S = String, B= Binary)
+                'AttributeType': 'S'   # N = Number (S = String, B= Binary)
             }
         ],
         ProvisionedThroughput={
