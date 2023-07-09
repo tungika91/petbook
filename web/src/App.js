@@ -2,7 +2,7 @@ import Layout from './Layout';
 import Home from './Home';
 import NewPet from './pets/NewPet';
 import PetDetail from './PetDetail';
-import PetMedical from './PetMedical';
+import PetMedical from './medicals/PetMedical';
 import EditPet from './pets/EditPet';
 import About from './About';
 import Missing from './Missing';
@@ -11,6 +11,7 @@ import Register from './login/Register';
 import RequireAuth from './login/RequireAuth';
 import { Route, Routes } from 'react-router-dom';
 import { DataProvider } from './context/DataContext';
+import EditPetMedicalRecord from './medicals/EditPetMedicalRecord';
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
             </Route>
             <Route path="post/:id/medical">
               <Route index element={<PetMedical />} />
+              <Route path=":record_id/edit" element={<EditPetMedicalRecord />} />
             </Route>
             <Route path="about" element={<About />} />
             <Route path="*" element={<Missing />} />

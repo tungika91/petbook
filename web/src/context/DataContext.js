@@ -36,6 +36,9 @@ export const DataProvider = ({ children }) => {
     const [newSter, setNewSter] = useState(ster);
     const [newPetDesc, setNewPetDesc] = useState(petDesc);
 
+    // Inputs for Pet Medical
+    const [medicalRecord, setMedicalRecord] = useState();
+
     // ------------------- CREATE in CRUD ------------------- //
     const addPet = async (petName, petType, dob, deworm, gender, ster, petDesc, userID) => {
         const id = pets.length ? pets[pets.length - 1].id + 1 : 1; // to reference the last post --> posts[posts.length-1]
@@ -160,7 +163,8 @@ export const DataProvider = ({ children }) => {
             handleSubmit, petName, setPetName, petType, setPetType, dob, setDob, deworm, setDeworm, gender, setGender, ster, setSter, petDesc, setPetDesc,
             pets, handleDelete,
             handleEdit, newPetName, setNewPetName, newPetType, setNewPetType, newDob, setNewDob, newDeworm, setNewDeworm, newGender, setNewGender, newSter, setNewSter, newPetDesc, setNewPetDesc,
-            user, setUser, pwd, setPwd, userID, setUserID, auth, setAuth, picURL, setPicURL, navigate
+            user, setUser, pwd, setPwd, userID, setUserID, auth, setAuth, picURL, setPicURL, navigate,
+            medicalRecord, setMedicalRecord
         }}>
             {children}
         </DataContext.Provider>

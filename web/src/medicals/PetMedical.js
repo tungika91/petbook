@@ -1,17 +1,17 @@
 import { useParams } from "react-router-dom";
-import { useContext, useState, useEffect } from 'react';
-import DataContext from './context/DataContext';
-import api from './api/posts';
+import { useContext, useEffect } from 'react';
+import DataContext from '../context/DataContext';
+import api from '../api/posts';
 import PetMedicalRecord from "./PetMedicalRecord";
 
 const PetMedical = () => {
-    const [medicalRecord, setMedicalRecord] = useState();
-    const { pets, userID, auth } = useContext(DataContext);
+    // const [medicalRecord, setMedicalRecord] = useState();
+    const { pets, userID, auth, medicalRecord, setMedicalRecord } = useContext(DataContext);
     const { id } = useParams(); // id is used in Route
     const pet = pets.find(pet => (pet.id).toString() === id); // === is for string match, == for numeric
 
     useEffect(() => {
-    const fetchMedical = async () => {
+    const getMedicalRecords = async () => {
         try {
             // in axios, it automatically returns response in json format and catch the error, accesible through response.data
             const response = await api.get(`${userID}/pets/${pet.id}/medical/all`, {
@@ -29,18 +29,18 @@ const PetMedical = () => {
             } else { console.log(`Error: ${err.message}`) }
         }
     }
-    fetchMedical();
-    }, [pet.id, auth, userID])
+    getMedicalRecords();
+    }, [pet.id, auth, userID, setMedicalRecord])
 
     return (
         <div className="container">
-            {medicalRecord ? medicalRecord.map(record => (
-                <PetMedicalRecord record={record} key={record.id} />
-            )) : "Missing Record"}
+            {medicalRecord 
+            ? medicalRecord.map(record => (
+                <PetMedicalRecord record={record} key={record.id} />))
+            : "Missing Record"}
+            <button>New Record</button>
         </div>
     )
-
-    
 }
 
 export default PetMedical

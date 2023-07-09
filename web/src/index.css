@@ -54,7 +54,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  color: white
+  color: white;
 }
 
 .Header h1 {
@@ -393,7 +393,6 @@ img {
 }
 
 .file-upload {
-
   margin-top: 1rem;
   height: 48px;
   min-width: 48px;
