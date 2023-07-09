@@ -12,6 +12,7 @@ import RequireAuth from './login/RequireAuth';
 import { Route, Routes } from 'react-router-dom';
 import { DataProvider } from './context/DataContext';
 import EditPetMedicalRecord from './medicals/EditPetMedicalRecord';
+import NewPetMedicalRecord from './medicals/NewPetMedicalRecord';
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
             <Route path="post/:id/medical">
               <Route index element={<PetMedical />} />
               <Route path=":record_id/edit" element={<EditPetMedicalRecord />} />
+              <Route path="new" element={<NewPetMedicalRecord />} />
             </Route>
             <Route path="about" element={<About />} />
             <Route path="*" element={<Missing />} />

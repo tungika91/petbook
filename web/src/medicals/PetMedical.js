@@ -1,11 +1,10 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useContext, useEffect } from 'react';
 import DataContext from '../context/DataContext';
 import api from '../api/posts';
 import PetMedicalRecord from "./PetMedicalRecord";
 
 const PetMedical = () => {
-    // const [medicalRecord, setMedicalRecord] = useState();
     const { pets, userID, auth, medicalRecord, setMedicalRecord } = useContext(DataContext);
     const { id } = useParams(); // id is used in Route
     const pet = pets.find(pet => (pet.id).toString() === id); // === is for string match, == for numeric
@@ -38,6 +37,9 @@ const PetMedical = () => {
             ? medicalRecord.map(record => (
                 <PetMedicalRecord record={record} key={record.id} />))
             : "Missing Record"}
+            <Link to={`new`}>
+                <button>New Record</button>
+            </Link>
         </div>
     )
 }
