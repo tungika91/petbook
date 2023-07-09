@@ -1,13 +1,16 @@
 import { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { useContext } from 'react';
 import DataContext from '../context/DataContext';
+import api from '../api/posts';
 
 export const EditPetMedicalRecord = () => {
+    const navigate = useNavigate();
+
     // Inputs for Pet in PATCH
-    const { medicalRecord } = useContext(DataContext);
+    const { medicalRecord, userID, setMedicalRecord, auth } = useContext(DataContext);
     console.log(medicalRecord);
-    const { record_id } = useParams(); // extract the id from the link
+    const { id, record_id } = useParams(); // extract the id from the link
     console.log(record_id)
     const record = medicalRecord.find(record => (record.id).toString() === record_id);
     const [newClinic, setNewClinic] = useState('');
@@ -29,6 +32,30 @@ export const EditPetMedicalRecord = () => {
         }
     }, [record, setNewClinic, setNewDoctor, setNewAddress, setNewPhone,  setNewDate, setNewReason])
     
+    const handleMedicalEdit = async (record_id) => {
+        const updateMedical = {
+            id: record_id,
+            date: newDate,
+            clinic: newClinic,
+            address: newAddress,
+            phone: newPhone,
+            doctor: newDoctor,
+            agenda: newReason
+        };
+        try {
+            const response = await api.patch(`${userID}/pets/${id}/medical/${record_id}`, updateMedical, {
+                headers: {
+                    'x-access-token': auth.accessToken
+                }
+            });
+            console.log(response.data)
+            // setMedicalRecord(pets.map(pet => (pet.id).toString() === id ? { ...response.data } : pet)) // if pet id matches then update
+            navigate(`/post/${id}`)
+        } catch (err) {
+            console.log(`Error: ${err.message}`)
+        }
+    }
+
     return (
         <main className="NewPost">
             {record &&
@@ -83,6 +110,8 @@ export const EditPetMedicalRecord = () => {
                             value={ newReason }
                             onChange={(e) => setNewReason(e.target.value)}
                         />
+                        <button type="submit" onClick={() => handleMedicalEdit(record_id)}>Submit</button>
+
                     </form>
                 </>
             }

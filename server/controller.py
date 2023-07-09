@@ -79,6 +79,18 @@ def update_in_medical(id, data:dict):
             'doctor': {
                 'Value'  : data['doctor'],
                 'Action' : 'PUT'
+            },
+            'address': {
+                'Value'  : data['address'],
+                'Action' : 'PUT'
+            },
+            'phone': {
+                'Value'  : data['phone'],
+                'Action' : 'PUT'
+            },
+            'agenda': {
+                'Value'  : data['agenda'],
+                'Action' : 'PUT'
             }
         },
         ReturnValues = "UPDATED_NEW"  # returns the new updated values

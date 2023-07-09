@@ -429,14 +429,15 @@ def delete_medical(current_user, user_id, id):
         'error': response
     }
 
-@bp.route('/medical/<int:id>', methods=['PATCH'])
+@bp.route('/<int:user_id>/pets/<int:pet_id>/medical/<int:record_id>', methods=['PATCH'])
 @cross_origin()
 @token_required
-def update_medical(current_user, user_id, id):
+def update_medical(current_user, user_id, pet_id, record_id):
     if current_user.id != user_id:
         return jsonify({'message': 'Cannot perform that function'})
+    
     data = request.get_json()
-    response = dynamodb.update_in_medical(id, data)
+    response = dynamodb.update_in_medical(record_id, data)
     if (response['ResponseMetadata']['HTTPStatusCode'] == 200):
         return {
             'msg'                : 'Updated successfully',
