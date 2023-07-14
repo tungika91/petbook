@@ -41,6 +41,7 @@ const Login = () => {
             // const roles = response?.data?.roles;
             // setUser('');
             // setPwd('');
+            console.log(from)
             navigate(from, { replace: true });
 
         } catch (err) {

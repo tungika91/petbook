@@ -12,7 +12,6 @@ const PetMedical = () => {
     useEffect(() => {
     const getMedicalRecords = async () => {
         try {
-            // in axios, it automatically returns response in json format and catch the error, accesible through response.data
             const response = await api.get(`${userID}/pets/${pet.id}/medical/all`, {
                 headers: {
                     'x-access-token': auth.accessToken
@@ -29,18 +28,22 @@ const PetMedical = () => {
         }
     }
     getMedicalRecords();
-    }, [pet.id, auth, userID, setMedicalRecord])
+    }, [pet, userID, auth])
 
     return (
-        <div className="container">
-            {medicalRecord 
-            ? medicalRecord.map(record => (
-                <PetMedicalRecord record={record} key={record.id} />))
-            : "Missing Record"}
-            <Link to={`new`}>
-                <button>New Record</button>
+        <>
+            <Link to={'new'}>
+                <button>Add New Record</button>
             </Link>
-        </div>
+
+            <div className="container">
+                {medicalRecord 
+                ? medicalRecord.map(record => (
+                    <PetMedicalRecord record={record} key={record.id} />))
+                : "Missing Record"}
+            </div>
+        </>
+        
     )
 }
 

@@ -1,16 +1,17 @@
 import { useEffect, useState } from "react";
-import { useParams, Link, useNavigate } from "react-router-dom";
+import { useParams, Link, useNavigate, useLocation } from "react-router-dom";
 import { useContext } from 'react';
 import DataContext from '../context/DataContext';
 import api from '../api/posts';
 
 export const EditPetMedicalRecord = () => {
     const navigate = useNavigate();
-
-    // Inputs for Pet in PATCH
-    const { medicalRecord, userID, setMedicalRecord, auth } = useContext(DataContext);
+    // access prop by using location = useLocation() through location.state
+    const location = useLocation();
+    const record = location.state;
+    console.log(record)
+    const { userID, auth } = useContext(DataContext);
     const { id, record_id } = useParams(); // extract the id from the link
-    const record = medicalRecord.find(record => (record.id).toString() === record_id);
     const [newClinic, setNewClinic] = useState('');
     const [newDoctor, setNewDoctor] = useState('');
     const [newAddress, setNewAddress] = useState('');
@@ -28,7 +29,7 @@ export const EditPetMedicalRecord = () => {
             setNewDate(record.date);
             setNewReason(record.agenda);
         }
-    }, [record, setNewClinic, setNewDoctor, setNewAddress, setNewPhone,  setNewDate, setNewReason])
+    }, [record])
     
     const handleMedicalEdit = async (record_id) => {
         const updateMedical = {
@@ -46,7 +47,6 @@ export const EditPetMedicalRecord = () => {
                     'x-access-token': auth.accessToken
                 }
             });
-            // setMedicalRecord(pets.map(pet => (pet.id).toString() === id ? { ...response.data } : pet)) // if pet id matches then update
             navigate(`/post/${id}`)
         } catch (err) {
             console.log(`Error: ${err.message}`)

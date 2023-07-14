@@ -82,7 +82,6 @@ export const DataProvider = ({ children }) => {
         addPet(petName, petType, dob, deworm, gender, ster, petDesc, userID) // addItem function
         navigate('/'); // return to home page after submitting post
     }
-
     // ------------------- REQUEST in CRUD ------------------- //
     useEffect(() => {
         const fetchPets = async () => {
@@ -94,7 +93,6 @@ export const DataProvider = ({ children }) => {
                     }
                 });
                 setPets(response.data); // response.data is in json format
-                console.log(response.data)
 
             } catch (err) {
                 if (err.response) { // Not in the 200 response range

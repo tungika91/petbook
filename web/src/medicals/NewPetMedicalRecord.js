@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { useParams, Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import { useContext } from 'react';
 import DataContext from '../context/DataContext';
 import api from '../api/posts';
@@ -8,9 +8,8 @@ export const NewPetMedicalRecord = () => {
     const navigate = useNavigate();
 
     // Inputs for Pet in POST
-    const { medicalRecord, userID, auth } = useContext(DataContext);
-    const { id, record_id } = useParams(); // extract the id from the link
-    const record = medicalRecord.find(record => (record.id).toString() === record_id);
+    const { userID, auth } = useContext(DataContext);
+    const { id } = useParams(); // extract the id from the link
     const [newClinic, setNewClinic] = useState('');
     const [newDoctor, setNewDoctor] = useState('');
     const [newAddress, setNewAddress] = useState('');

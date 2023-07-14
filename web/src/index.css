@@ -208,6 +208,8 @@ body {
   padding: 0.5rem;
   font-size: 1rem;
   cursor: pointer;
+  background-color: #bae415;
+  color: black;
 }
 
 .Missing h2, .PostPage h2, 
@@ -328,10 +330,12 @@ textarea {
 label,
 button {
   margin-top: 1rem;
+  cursor: pointer;
 }
 
 button {
   padding: 0.5rem;
+  cursor: pointer;
 }
 
 .instructions {

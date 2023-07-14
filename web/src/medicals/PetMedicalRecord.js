@@ -32,12 +32,20 @@ const PetMedicalRecord = ({ record }) => {
                 <li className="recordList">Doctor: { record.doctor }</li>
                 <li className="recordList">Reason: { record.agenda }</li>
             </div> 
-            <Link to={`${record.id}/edit`}>
-                <button>Edit</button>
-            </Link>
-            <button onClick={()=>handleMedicalDelete()}>x</button>
+
+            <div className='container_btn'>
+                <Link to = {`${record.id}/edit`} state = { record }>
+                    <button className='a.btn'>Edit</button>
+                </Link>
+                <button  vclass="btn btn-primary">Primary</button>
+                <button onClick={()=>handleMedicalDelete()}>x</button>
+            </div>
+
+
+
         </>
     )
 }
+// sending props down Link through state. Then prop can be accessed via useLocation
 
 export default PetMedicalRecord
