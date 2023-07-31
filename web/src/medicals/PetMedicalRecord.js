@@ -37,11 +37,9 @@ const PetMedicalRecord = ({ record }) => {
                 <Link to = {`${record.id}/edit`} state = { record }>
                     <button className='a.btn'>Edit</button>
                 </Link>
-                <button  vclass="btn btn-primary">Primary</button>
-                <button onClick={()=>handleMedicalDelete()}>x</button>
+                <button>Upload</button>
+                <button onClick={()=>handleMedicalDelete()}>Delete</button>
             </div>
-
-
 
         </>
     )

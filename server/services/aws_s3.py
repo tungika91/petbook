@@ -67,7 +67,7 @@ def upload_file_to_s3(file, bucket = BUCKET_NAME):
     try:
         s3.upload_fileobj(
             file,
-            BUCKET_NAME,
+            bucket,
             f'uploads/{file.filename}',
             ExtraArgs={
                 "ContentType": file.content_type
@@ -89,3 +89,16 @@ def get_image_url(bucket, filename):
     except Exception as e:
         pass
     return presigned_url
+
+from pathlib import Path
+def upload_file_using_client():
+    """
+    Uploads file to S3 bucket using S3 client object
+    :return: None
+    """
+    s3 = boto3.client("s3")
+    object_name = "IMG_B2B602DCF126-1.jpeg"
+    file_name = os.path.join("/Users/tungngo/Downloads", "IMG_B2B602DCF126-1.jpeg")
+    print(file_name)
+    response = s3.upload_file(file_name, BUCKET_NAME, object_name)
+    print(response)  # prints None

@@ -61,3 +61,12 @@ class Img(db.Model):
     
     def __repr__(self):
         return "<Pet id %r>" % self.pet_id
+    
+class MedRec(db.Model):
+    __tablename__ = 'med_records'
+    id = db.Column(db.Integer, primary_key = True)
+    record_filename = db.Column(db.String())
+    pet_id = db.Column(db.Integer, db.ForeignKey('pets.id'))
+    
+    def __repr__(self):
+        return "<Pet id %r>" % self.pet_id

@@ -1,11 +1,11 @@
 from flask import Blueprint, request, jsonify, url_for, redirect
 from werkzeug.security import check_password_hash, generate_password_hash
-from models.models import User, Pet, Img
+from models.models import User, Pet, Img, MedRec
 from config import AWS_S3_BUCKET
 from extensions import db
 from flask_cors import cross_origin
 from auth_middleware import token_required
-from services.aws_s3 import allowed_file, get_unique_filename, upload_file_to_s3, get_image_url
+from services.aws_s3 import allowed_file, get_unique_filename, upload_file_to_s3, get_image_url, upload_file_using_client
 from datetime import datetime, timedelta
 import jwt
 import controller as dynamodb
@@ -447,3 +447,32 @@ def update_medical(current_user, user_id, pet_id, record_id):
     return {
         'error': response
     }
+
+@bp.route('/<int:user_id>/pets/<int:pet_id>/medical/upload', methods = ['POST'])
+@cross_origin()
+@token_required
+def upload_medrec(current_user, user_id, pet_id):
+    if current_user.id != user_id:
+        return jsonify({'message': 'Cannot perform that function'})
+    
+    if request.method == 'POST':
+        # med_record = request.files["file"]
+        # if not allowed_file(med_record.filename):
+        #     return {"errors": "file type not permitted"}, 400
+        
+        # med_record.filename = get_unique_filename(med_record.filename)
+        # print(med_record.filename)
+
+        # upload = upload_file_to_s3(med_record)
+        upload_file_using_client()
+        # if "url" not in upload:
+        #     # if the dictionary doesn't have a url key
+        #     # it means that there was an error when we tried to upload
+        #     # so we send back that error message
+        #     return upload, 400
+
+        # url = upload["url"]
+        # medrec = MedRec(record_filename=med_record.filename, pet_id=pet_id)
+        # db.session.add(medrec)
+        # db.session.commit()
+        # return {"url": url, "filename": medrec.filename}

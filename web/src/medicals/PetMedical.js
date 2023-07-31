@@ -17,8 +17,9 @@ const PetMedical = () => {
                     'x-access-token': auth.accessToken
                 }
             });
+            response.data.sort((a,b) => new Date(b.date) - new Date(a.date));
             setMedicalRecord(response.data); // response.data is in json format
-
+            console.log(response.data);
         } catch (err) {
             if (err.response) { // Not in the 200 response range
                 console.log(err.response.data);
