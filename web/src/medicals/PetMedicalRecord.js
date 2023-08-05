@@ -2,8 +2,9 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useContext } from 'react';
 import DataContext from '../context/DataContext';
 import api from '../api/posts';
+import FileUpload from "../FileUpload";
 
-const PetMedicalRecord = ({ record }) => {
+const PetMedicalRecord = ({ record, pet_id }) => {
     const { userID, auth } = useContext(DataContext);
     const { id } = useParams(); // extract the id from the link
     const navigate = useNavigate();
@@ -31,14 +32,17 @@ const PetMedicalRecord = ({ record }) => {
                 <li className="recordList">Phone: { record.phone }</li>
                 <li className="recordList">Doctor: { record.doctor }</li>
                 <li className="recordList">Reason: { record.agenda }</li>
+                <li className="recordList">Attachment: { record.attachment }</li>
             </div> 
 
             <div className='container_btn'>
                 <Link to = {`${record.id}/edit`} state = { record }>
                     <button className='a.btn'>Edit</button>
                 </Link>
-                <button>Upload</button>
                 <button onClick={()=>handleMedicalDelete()}>Delete</button>
+                <div>
+                    <FileUpload record_id = { record.id } pet_id = { pet_id }/>
+                </div>
             </div>
 
         </>

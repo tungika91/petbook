@@ -5,7 +5,7 @@ from config import AWS_S3_BUCKET
 from extensions import db
 from flask_cors import cross_origin
 from auth_middleware import token_required
-from services.aws_s3 import allowed_file, get_unique_filename, upload_file_to_s3, get_image_url, upload_file_using_client
+from services.aws_s3 import allowed_file, get_unique_filename, upload_file_to_s3, get_image_url
 from datetime import datetime, timedelta
 import jwt
 import controller as dynamodb
@@ -232,7 +232,7 @@ def pet(current_user, user_id, pet_id):
                 pet = Pet.query.filter(Pet.id==pet_id).one()
             except:
                 return jsonify({"response": "Pet Details not found"}), 404
-            
+            print(request.json)
             if 'sterilised' in request.json:
                 pet.sterilised = request.json['sterilised']
             if 'pet_description' in request.json:
@@ -250,7 +250,7 @@ def pet(current_user, user_id, pet_id):
                 pet.pet_type = request.json['pet_type']
             if 'pet_dob' in request.json:
                 pet.pet_dob = request.json['pet_dob']
-
+            
             db.session.add(pet)
             db.session.commit()
 
@@ -336,7 +336,7 @@ def upload(current_user, user_id, pet_id):
             return {"errors": "file type not permitted"}, 400
         
         image.filename = get_unique_filename(image.filename)
-        
+        print(image.filename)
         upload = upload_file_to_s3(image)
         if "url" not in upload:
             # if the dictionary doesn't have a url key
@@ -448,31 +448,46 @@ def update_medical(current_user, user_id, pet_id, record_id):
         'error': response
     }
 
-@bp.route('/<int:user_id>/pets/<int:pet_id>/medical/upload', methods = ['POST'])
+@bp.route('/<int:user_id>/pets/<int:pet_id>/medical/<record_id>/upload', methods = ['POST'])
 @cross_origin()
 @token_required
-def upload_medrec(current_user, user_id, pet_id):
+def upload_medrec(current_user, user_id, pet_id, record_id):
     if current_user.id != user_id:
         return jsonify({'message': 'Cannot perform that function'})
     
     if request.method == 'POST':
-        # med_record = request.files["file"]
-        # if not allowed_file(med_record.filename):
-        #     return {"errors": "file type not permitted"}, 400
+        file = request.files["file"]
+        if not allowed_file(file.filename):
+            return {"errors": "file type not permitted"}, 400
         
-        # med_record.filename = get_unique_filename(med_record.filename)
-        # print(med_record.filename)
+        upload = upload_file_to_s3(file)
+        if "url" not in upload:
+            # if the dictionary doesn't have a url key
+            # it means that there was an error when we tried to upload
+            # so we send back that error message
+            return upload, 400
 
-        # upload = upload_file_to_s3(med_record)
-        upload_file_using_client()
-        # if "url" not in upload:
-        #     # if the dictionary doesn't have a url key
-        #     # it means that there was an error when we tried to upload
-        #     # so we send back that error message
-        #     return upload, 400
+        url = upload["url"]
 
-        # url = upload["url"]
-        # medrec = MedRec(record_filename=med_record.filename, pet_id=pet_id)
-        # db.session.add(medrec)
-        # db.session.commit()
-        # return {"url": url, "filename": medrec.filename}
+        # Update Medical Table on DynamoDB
+        response = dynamodb.medicalTable.scan()
+        if (response['ResponseMetadata']['HTTPStatusCode'] == 200):
+            record = []
+            for item in response['Items']:
+                if item['pet_id'] == pet_id:
+                    if item['id'] == record_id:
+                        record.append(item)
+        record[0]['attachment'] = file.filename
+        print(record[0])
+        response = dynamodb.update_in_medical(record_id, record[0])
+        if (response['ResponseMetadata']['HTTPStatusCode'] == 200):
+            return {
+                'msg'                : 'Updated successfully',
+                'ModifiedAttributes' : response['Attributes'],
+                "url"                : url, 
+                "filename"           : file.filename
+            }
+        return {
+            'error': response
+        }
+        return url

@@ -40,7 +40,7 @@ const PetMedical = () => {
             <div className="container">
                 {medicalRecord 
                 ? medicalRecord.map(record => (
-                    <PetMedicalRecord record={record} key={record.id} />))
+                    <PetMedicalRecord record={record} pet_id = {pet.id} key={record.id} />))
                 : "Missing Record"}
             </div>
         </>

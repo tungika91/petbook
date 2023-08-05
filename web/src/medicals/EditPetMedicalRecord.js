@@ -41,6 +41,7 @@ export const EditPetMedicalRecord = () => {
             doctor: newDoctor,
             agenda: newReason
         };
+        console.log(updateMedical)
         try {
             const response = await api.patch(`${userID}/pets/${id}/medical/${record_id}`, updateMedical, {
                 headers: {
@@ -107,6 +108,7 @@ export const EditPetMedicalRecord = () => {
                             value={ newReason }
                             onChange={(e) => setNewReason(e.target.value)}
                         />
+
                         <button type="submit" onClick={() => handleMedicalEdit(record_id)}>Submit</button>
 
                     </form>

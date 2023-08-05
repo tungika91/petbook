@@ -28,7 +28,7 @@ def create_table_medical():
             }
         ],
         ProvisionedThroughput={
-            'ReadCapacityUnits'  : 10,
+            'ReadCapacityUnits' : 10,
             'WriteCapacityUnits': 10
         }
     )
@@ -36,7 +36,7 @@ def create_table_medical():
 
 medicalTable = resource.Table('Medical')
 
-def write_to_medical(id, pet_id, date, clinic, address, phone, doctor, agenda):
+def write_to_medical(id, pet_id, date, clinic, address, phone, doctor, agenda, attachment):
     response = medicalTable.put_item(
         Item = {
             'id'        : id,
@@ -47,6 +47,7 @@ def write_to_medical(id, pet_id, date, clinic, address, phone, doctor, agenda):
             'phone'     : phone,
             'doctor'    : doctor,
             'agenda'    : agenda,
+            'attachment': attachment
         }
     )
     return response
@@ -94,20 +95,6 @@ def update_in_medical(id, data:dict):
             }
         },
         ReturnValues = "UPDATED_NEW"  # returns the new updated values
-    )
-    return response
-
-def modify_director_for_medical(id, director):
-    response = medicalTable.update_item(
-        Key = {
-            'id': id
-        },
-        UpdateExpression = 'SET info.director = :director', #set director to new value
-        #ConditionExpression = '', # execute until this condition fails # no condition
-        ExpressionAttributeValues = { # Value for the variables used in the above expressions
-            ':new_director': director
-        },
-        ReturnValues = "UPDATED_NEW"  #what to return
     )
     return response
 

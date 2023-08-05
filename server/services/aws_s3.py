@@ -1,5 +1,4 @@
 import boto3
-import botocore
 import logging
 from botocore.exceptions import ClientError
 import os
@@ -10,7 +9,7 @@ load_dotenv()
 
 AWS_ACCESS_KEY = os.getenv('AWS_ACCESS_KEY')
 AWS_ACCESS_SECRET = os.getenv('AWS_ACCESS_SECRET')
-BUCKET_NAME = os.environ.get("BUCKET_NAME")
+BUCKET_NAME = os.environ.get("AWS_S3_BUCKET")
 S3_LOCATION = f"https://{BUCKET_NAME}.s3.amazonaws.com/"
 ALLOWED_EXTENSIONS = {"pdf", "png", "jpg", "jpeg", "gif"}
 
@@ -90,15 +89,18 @@ def get_image_url(bucket, filename):
         pass
     return presigned_url
 
-from pathlib import Path
-def upload_file_using_client():
-    """
-    Uploads file to S3 bucket using S3 client object
-    :return: None
-    """
-    s3 = boto3.client("s3")
-    object_name = "IMG_B2B602DCF126-1.jpeg"
-    file_name = os.path.join("/Users/tungngo/Downloads", "IMG_B2B602DCF126-1.jpeg")
-    print(file_name)
-    response = s3.upload_file(file_name, BUCKET_NAME, object_name)
-    print(response)  # prints None
+def upload_files(file, bucket = BUCKET_NAME):
+    try:
+        s3.upload_fileobj(
+            file,
+            bucket,
+            f'uploads/{file.filename}',
+            ExtraArgs={
+                "ContentType": file.content_type
+            }
+        )
+    except Exception as e:
+        # in case the our s3 upload fails
+        return {"errors": str(e)}
+
+    return {"url": f"{S3_LOCATION}{file.filename}"}

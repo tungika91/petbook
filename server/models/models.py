@@ -42,7 +42,6 @@ class Pet(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     profile_pics = relationship("Img", cascade="all,delete,delete-orphan")
 
-
     def __repr__(self):
         return "<Pet %r>" % self.pet_name
     
@@ -51,6 +50,7 @@ class Pet(db.Model):
         del d['deworm_reminder']
         del d['user_id']
         del d['pet_age']
+        del d['profile_pics']
         return d
     
 class Img(db.Model):
