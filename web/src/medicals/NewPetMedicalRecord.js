@@ -33,6 +33,7 @@ export const NewPetMedicalRecord = () => {
                 }
             });
             navigate(`/post/${id}`)
+            console.log(response)
         } catch (err) {
             console.log(`Error: ${err.message}`)
         }

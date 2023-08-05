@@ -29,7 +29,7 @@ const PetMedical = () => {
         }
     }
     getMedicalRecords();
-    }, [pet, userID, auth])
+    }, [pet, userID, auth, setMedicalRecord])
 
     return (
         <>

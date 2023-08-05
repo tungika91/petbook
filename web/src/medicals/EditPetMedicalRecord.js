@@ -49,6 +49,7 @@ export const EditPetMedicalRecord = () => {
                 }
             });
             navigate(`/post/${id}`)
+            console.log(response)
         } catch (err) {
             console.log(`Error: ${err.message}`)
         }
