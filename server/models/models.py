@@ -62,6 +62,7 @@ class Img(db.Model):
     def __repr__(self):
         return "<Pet id %r>" % self.pet_id
     
+# Not being used
 class MedRec(db.Model):
     __tablename__ = 'med_records'
     id = db.Column(db.Integer, primary_key = True)

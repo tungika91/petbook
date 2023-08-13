@@ -19,7 +19,6 @@ const PetMedical = () => {
             });
             response.data.sort((a,b) => new Date(b.date) - new Date(a.date));
             setMedicalRecord(response.data); // response.data is in json format
-            console.log(response.data);
         } catch (err) {
             if (err.response) { // Not in the 200 response range
                 console.log(err.response.data);
@@ -36,7 +35,6 @@ const PetMedical = () => {
             <Link to={'new'}>
                 <button>Add New Record</button>
             </Link>
-
             <div className="container">
                 {medicalRecord 
                 ? medicalRecord.map(record => (

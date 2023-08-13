@@ -3,6 +3,7 @@ import { useContext } from 'react';
 import DataContext from '../context/DataContext';
 import api from '../api/posts';
 import FileUpload from "../FileUpload";
+import FileDownload from '../FileDownload';
 
 const PetMedicalRecord = ({ record, pet_id }) => {
     const { userID, auth } = useContext(DataContext);
@@ -35,16 +36,14 @@ const PetMedicalRecord = ({ record, pet_id }) => {
                 <li className="recordList">Attachment: { record.attachment }</li>
             </div> 
 
-            <div className='container_btn'>
+            <div>
                 <Link to = {`${record.id}/edit`} state = { record }>
-                    <button className='a.btn'>Edit</button>
+                    <button>Edit</button>
                 </Link>
                 <button onClick={()=>handleMedicalDelete()}>Delete</button>
-                <div>
-                    <FileUpload record_id = { record.id } pet_id = { pet_id }/>
-                </div>
+                <FileDownload record_id = { record.id } pet_id = { pet_id }/>
+                <FileUpload record_id = { record.id } pet_id = { pet_id } />
             </div>
-
         </>
     )
 }

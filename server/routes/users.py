@@ -5,7 +5,7 @@ from config import AWS_S3_BUCKET
 from extensions import db
 from flask_cors import cross_origin
 from auth_middleware import token_required
-from services.aws_s3 import allowed_file, get_unique_filename, upload_file_to_s3, get_image_url
+from services.aws_s3 import allowed_file, get_unique_filename, upload_file_to_s3, get_image_url, get_medrec_url
 from datetime import datetime, timedelta
 import jwt
 import controller as dynamodb
@@ -448,6 +448,23 @@ def update_medical(current_user, user_id, pet_id, record_id):
         'error': response
     }
 
+@bp.route('/<int:user_id>/pets/<int:pet_id>/medical/<record_id>/download', methods=['GET'])
+@cross_origin()
+@token_required
+def view_medrec(current_user, user_id, pet_id, record_id):
+    if current_user.id != user_id:
+        return jsonify({'message': 'Cannot perform that function'})
+
+    response = dynamodb.medicalTable.scan()
+    if (response['ResponseMetadata']['HTTPStatusCode'] == 200):
+        for item in response['Items']:
+            if item['id'] == record_id:
+                attachment_name = item['attachment']
+                result = get_medrec_url(AWS_S3_BUCKET, attachment_name)
+                return result
+    else:
+        return {'error': response} 
+
 @bp.route('/<int:user_id>/pets/<int:pet_id>/medical/<record_id>/upload', methods = ['POST'])
 @cross_origin()
 @token_required
@@ -490,4 +507,3 @@ def upload_medrec(current_user, user_id, pet_id, record_id):
         return {
             'error': response
         }
-        return url

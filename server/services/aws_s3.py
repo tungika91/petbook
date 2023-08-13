@@ -89,6 +89,17 @@ def get_image_url(bucket, filename):
         pass
     return presigned_url
 
+def get_medrec_url(bucket, filename):
+    presigned_url = ''
+    try:
+        for item in s3.list_objects(Bucket=bucket)['Contents']:
+            if item['Key'] == f'uploads/{filename}': # unique filename
+                presigned_url = s3.generate_presigned_url('get_object', Params = {'Bucket': bucket, 'Key': item['Key']}, ExpiresIn = 100)
+                break
+    except Exception as e:
+        pass
+    return presigned_url
+
 def upload_files(file, bucket = BUCKET_NAME):
     try:
         s3.upload_fileobj(
