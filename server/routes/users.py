@@ -459,9 +459,12 @@ def view_medrec(current_user, user_id, pet_id, record_id):
     if (response['ResponseMetadata']['HTTPStatusCode'] == 200):
         for item in response['Items']:
             if item['id'] == record_id:
-                attachment_name = item['attachment']
-                result = get_medrec_url(AWS_S3_BUCKET, attachment_name)
-                return result
+                if 'attachment' in item.keys():
+                    attachment_name = item['attachment']
+                    result = get_medrec_url(AWS_S3_BUCKET, attachment_name)
+                    return result
+                else:
+                    return {'error': 'No record found!'}
     else:
         return {'error': response} 
 

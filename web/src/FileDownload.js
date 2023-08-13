@@ -14,7 +14,8 @@ const FileDownload = ({ record_id, pet_id }) => {
             })
             .then((response) => {
                 // Open in new tab in browser
-                window.open(response.data);        
+                const res = response.data
+                res['error'] ? alert(res['error']) : window.open(res);        
             })
             .catch((error) => {
                 console.log(error);
