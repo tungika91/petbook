@@ -1,15 +1,10 @@
-// import { FaLaptop, FaTabletAlt, FaMobileAlt} from 'react-icons/fa';
-// import useWindowSize from './hooks/useWindowSize';
+import { MdAccountCircle } from "react-icons/md";
 
 const Header = ({ title, user }) => {
-    // const { width } = useWindowSize();
     return (
         <header className="Header">
             <h1>{ title }</h1>
-            <p>Welcome <br/>{ user }!</p>
-            {/* {width < 768 ? <FaMobileAlt />
-                : width < 992 ? <FaTabletAlt/> 
-                    : <FaLaptop/>} */}
+            <div><MdAccountCircle/> { user }</div>
         </header>
     )
 }

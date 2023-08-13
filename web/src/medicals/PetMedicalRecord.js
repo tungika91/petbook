@@ -4,6 +4,8 @@ import DataContext from '../context/DataContext';
 import api from '../api/posts';
 import FileUpload from "../FileUpload";
 import FileDownload from '../FileDownload';
+import { MdDeleteForever, MdEditSquare, MdKeyboardDoubleArrowDown, MdKeyboardDoubleArrowUp, MdMoreHoriz, MdMoreVert  } from "react-icons/md";
+
 
 const PetMedicalRecord = ({ record, pet_id }) => {
     const { userID, auth } = useContext(DataContext);
@@ -15,9 +17,9 @@ const PetMedicalRecord = ({ record, pet_id }) => {
         return (
             <ul className="drop-down">
                 <Link to = {`${record.id}/edit`} state = { record }>
-                    <button>Edit</button>
+                    <button><MdEditSquare/></button>
                 </Link>
-                <button onClick={()=>handleMedicalDelete()}>Delete</button>
+                <button onClick={()=>handleMedicalDelete()}><MdDeleteForever /></button>
                 <FileDownload record_id = { record.id } pet_id = { pet_id }/>
                 <FileUpload record_id = { record.id } pet_id = { pet_id } />
             </ul>
@@ -49,16 +51,11 @@ const PetMedicalRecord = ({ record, pet_id }) => {
                 <li className="recordList">Reason: { record.agenda }</li>
                 <li className="recordList">Attachment: { record.attachment }</li>
 
-                <button onClick={() => setPopUpMenu(!popUpMenu)}> More </button>
+                <button onClick={() => setPopUpMenu(!popUpMenu)}> 
+                    { popUpMenu ? <MdKeyboardDoubleArrowUp/> : <MdKeyboardDoubleArrowDown/> }
+                </button>
                 {popUpMenu && PopUpMenu()}
             </div>
-        
-                {/* <Link to = {`${record.id}/edit`} state = { record }>
-                    <button>Edit</button>
-                </Link>
-                <button onClick={()=>handleMedicalDelete()}>Delete</button>
-                <FileDownload record_id = { record.id } pet_id = { pet_id }/>
-                <FileUpload record_id = { record.id } pet_id = { pet_id } /> */}
         </>
     )
 }

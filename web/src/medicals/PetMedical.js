@@ -32,9 +32,11 @@ const PetMedical = () => {
 
     return (
         <>
-            <Link to={'new'}>
-                <button>Add New Record</button>
-            </Link>
+            <div className="newRecord">
+                <Link to={'new'}>
+                    <button> Add Medical Record </button>
+                </Link>
+            </div>
             <div className="container">
                 {medicalRecord 
                 ? medicalRecord.map(record => (

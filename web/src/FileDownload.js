@@ -1,6 +1,7 @@
 import { useContext } from "react"
 import DataContext from './context/DataContext';
 import api from './api/posts';
+import { MdOutlineFileDownload } from "react-icons/md";
 
 const FileDownload = ({ record_id, pet_id }) => {
     const { userID, auth } = useContext(DataContext);
@@ -27,7 +28,7 @@ const FileDownload = ({ record_id, pet_id }) => {
     }
     return (
         <>
-            <button onClick={handleDownload}> Download </button>
+            <button onClick={handleDownload}> <MdOutlineFileDownload/> </button>
         </>
     )
 }

@@ -2,6 +2,7 @@ import { useContext } from "react"
 import { useState } from "react";
 import DataContext from './context/DataContext';
 import api from './api/posts';
+import { MdOutlineFileUpload } from "react-icons/md";
 
 const FileUpload = ({ record_id, pet_id }) => {
     const { userID, auth, navigate } = useContext(DataContext);
@@ -27,7 +28,7 @@ const FileUpload = ({ record_id, pet_id }) => {
     return (
         <>
             <input class="file-upload" type="file" name='file' onChange={(e) => handleFile(e)}/>
-            <button onClick={handleUpload}> Upload </button>
+            <button onClick={handleUpload}> <MdOutlineFileUpload/> </button>
         </>
     )
 }

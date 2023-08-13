@@ -3,6 +3,7 @@ import { useContext } from 'react';
 import DataContext from './context/DataContext';
 import ImageUpload from "./ImageUpload";
 import styled from "styled-components";
+import { MdDeleteForever, MdEditSquare, MdMedicalInformation } from "react-icons/md";
 
 // -------------- CSS Style -------------- //
 const Button1 = styled.button`
@@ -61,12 +62,12 @@ const PetDetail = () => {
                             <li className="postBody">Description: {pet.pet_description}</li>
 
                             <Button1 onClick={() => handleDelete(pet.id)}>
-                                Remove Pet
+                                <MdDeleteForever/>
                             </Button1>
 
-                            <Link to={`edit`}><Button2>Edit Pet</Button2></Link>
+                            <Link to={`edit`}><Button2> <MdEditSquare/> </Button2></Link>
 
-                            <Link to={`medical`}><Button3>Medical Info</Button3></Link>
+                            <Link to={`medical`}><Button3><MdMedicalInformation/></Button3></Link>
 
                             <ImageUpload pet_id = {pet.id}/>
                         </> ) 
