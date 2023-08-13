@@ -68,9 +68,7 @@ const PetDetail = () => {
 
                             <Link to={`medical`}><Button3>Medical Info</Button3></Link>
 
-                            <div>
-                                <ImageUpload pet_id = {pet.id}/>
-                            </div>
+                            <ImageUpload pet_id = {pet.id}/>
                         </> ) 
                         : (
                         <>

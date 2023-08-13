@@ -1,5 +1,5 @@
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import DataContext from '../context/DataContext';
 import api from '../api/posts';
 import FileUpload from "../FileUpload";
@@ -9,6 +9,20 @@ const PetMedicalRecord = ({ record, pet_id }) => {
     const { userID, auth } = useContext(DataContext);
     const { id } = useParams(); // extract the id from the link
     const navigate = useNavigate();
+    const [popUpMenu, setPopUpMenu] = useState(false);
+
+    function PopUpMenu() {
+        return (
+            <ul className="drop-down">
+                <Link to = {`${record.id}/edit`} state = { record }>
+                    <button>Edit</button>
+                </Link>
+                <button onClick={()=>handleMedicalDelete()}>Delete</button>
+                <FileDownload record_id = { record.id } pet_id = { pet_id }/>
+                <FileUpload record_id = { record.id } pet_id = { pet_id } />
+            </ul>
+        );
+    }
 
     const handleMedicalDelete = async () => {
         try {
@@ -34,16 +48,17 @@ const PetMedicalRecord = ({ record, pet_id }) => {
                 <li className="recordList">Doctor: { record.doctor }</li>
                 <li className="recordList">Reason: { record.agenda }</li>
                 <li className="recordList">Attachment: { record.attachment }</li>
-            </div> 
 
-            <div>
-                <Link to = {`${record.id}/edit`} state = { record }>
+                <button onClick={() => setPopUpMenu(!popUpMenu)}> More </button>
+                {popUpMenu && PopUpMenu()}
+            </div>
+        
+                {/* <Link to = {`${record.id}/edit`} state = { record }>
                     <button>Edit</button>
                 </Link>
                 <button onClick={()=>handleMedicalDelete()}>Delete</button>
                 <FileDownload record_id = { record.id } pet_id = { pet_id }/>
-                <FileUpload record_id = { record.id } pet_id = { pet_id } />
-            </div>
+                <FileUpload record_id = { record.id } pet_id = { pet_id } /> */}
         </>
     )
 }

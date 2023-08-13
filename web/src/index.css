@@ -29,12 +29,11 @@ body {
 .App {
   width: 100%;
   /* max-width: 800px; */
-  height: 100vh;
+  /* height: 100vh; */
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  border: 1px solid #333;
   box-shadow: 0px 0px 15px gray;
 }
 
@@ -146,7 +145,7 @@ body {
 .post {
   margin-top: 1rem;
   padding-bottom: 1rem;
-  border-bottom: 1px solid lightgray;
+  /* border-bottom: 1px solid lightgray; */
 }
 
 .Home .post a {
@@ -210,6 +209,7 @@ body {
   cursor: pointer;
   background-color: #bae415;
   color: black;
+  border: none;
 }
 
 .Missing h2, .PostPage h2, 
@@ -336,8 +336,10 @@ button {
 button {
   padding: 0.25rem;
   /* margin-left: 0.25rem; */
+  height: 48px;
   cursor: pointer;
   border-radius: 0.25rem;
+  border: none;
 }
 
 .instructions {
@@ -399,10 +401,23 @@ img {
 }
 
 .file-upload {
-  min-width: 20px;
+  width: 15rem;
   border-radius: 10px;
   padding: 0.5rem;
   font-size: 1rem;
+}
+
+.image-upload button {
+  margin-left: 0.5rem;
+  margin-top: 0.25rem;
+  margin-bottom: 0.5rem;
+  height: 48px;
+  border-radius: 5px;
+  padding: 0.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  /* background-color: #2d545e; */
+  color: black;
 }
 
 .container {
@@ -497,9 +512,10 @@ img {
 }
 
 .record {
-  width: 80%;
-  height: 13rem;
-  margin-top: 0.5rem;
+  width: 90%;
+  /* height: 13rem; */
+  /* margin-top: 0.5rem; */
+  margin-bottom: 0.5rem;
   position: relative;
   border-radius: 10px;
   overflow: hidden;
@@ -525,4 +541,30 @@ img {
   margin-left: 0.5rem;
   margin-bottom: 0.5rem;
   font-size: large;
+}
+
+.record button {
+  margin-left: 0.5rem;
+  margin-top: 0.25rem;
+  margin-bottom: 0.5rem;
+  height: 40px;
+  padding: 0.5rem;
+  font-size: 1rem;
+  /* cursor: pointer; */
+  background-color: white;
+  color: #2d545e;
+  border: none;
+}
+
+.drop-down button {
+  margin-left: 0.5rem;
+  margin-top: 0.25rem;
+  margin-bottom: 0.5rem;
+  height: 48px;
+  border-radius: 5px;
+  padding: 0.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  background-color: #2d545e;
+  color: white;
 }

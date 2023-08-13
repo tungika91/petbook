@@ -25,10 +25,10 @@ const ImageUpload = ({ pet_id }) => {
     }
 
     return (
-        <div>
+        <>
             <input class="file-upload" type="file" name='file' onChange={(e) => handleFile(e)}/>
-            <button onClick={handleUpload}> Upload </button>
-        </div>
+            <button onClick={handleUpload}> Upload Photo </button>
+        </>
     )
 }
 
