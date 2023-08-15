@@ -61,7 +61,9 @@ const PetDetail = () => {
                             <li className="postBody">Pet Type: {pet.pet_type}</li>
                             <li className="postBody">Description: {pet.pet_description}</li>
 
-                            <Button1 onClick={() => handleDelete(pet.id)}>
+                            <Button1 onClick={() => {
+                                    const confirmBox = window.confirm("Do you really want to remove this pet?");
+                                    confirmBox ? handleDelete(pet.id) : console.log('No')}}>
                                 <MdDeleteForever/>
                             </Button1>
 

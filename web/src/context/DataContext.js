@@ -17,6 +17,7 @@ export const DataProvider = ({ children }) => {
     const [pwd, setPwd] = useState('');
     const [userID, setUserID] = useState('');
     const [auth, setAuth] = useState({})
+    const [email, setEmail] = useState('');
 
     // Inputs for Pet in POST
     const [petName, setPetName] = useState('');
@@ -162,7 +163,7 @@ export const DataProvider = ({ children }) => {
             pets, handleDelete,
             handleEdit, newPetName, setNewPetName, newPetType, setNewPetType, newDob, setNewDob, newDeworm, setNewDeworm, newGender, setNewGender, newSter, setNewSter, newPetDesc, setNewPetDesc,
             user, setUser, pwd, setPwd, userID, setUserID, auth, setAuth, picURL, setPicURL, navigate,
-            medicalRecord, setMedicalRecord
+            medicalRecord, setMedicalRecord, email, setEmail
         }}>
             {children}
         </DataContext.Provider>

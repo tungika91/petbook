@@ -92,6 +92,10 @@ def update_in_medical(id, data:dict):
             'agenda': {
                 'Value'  : data['agenda'],
                 'Action' : 'PUT'
+            },
+            'attachment': {
+                'Value'  : data['attachment'],
+                'Action' : 'PUT'
             }
         },
         ReturnValues = "UPDATED_NEW"  # returns the new updated values

@@ -28,7 +28,7 @@ body {
 .App {
   width: 100%;
   /* max-width: 800px; */
-  /* height: 100vh; */
+  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -577,6 +577,7 @@ img {
   margin-left: 0.5rem;
   margin-top: 0.25rem;
   margin-bottom: 0.5rem;
+  margin-right: 0.5rem;
   height: 48px;
   border-radius: 5px;
   padding: 0.5rem;

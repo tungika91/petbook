@@ -4,7 +4,7 @@ import DataContext from '../context/DataContext';
 import api from '../api/posts';
 import FileUpload from "../FileUpload";
 import FileDownload from '../FileDownload';
-import { MdDeleteForever, MdEditSquare, MdKeyboardDoubleArrowDown, MdKeyboardDoubleArrowUp, MdMoreHoriz, MdMoreVert  } from "react-icons/md";
+import { MdDeleteForever, MdEditSquare, MdKeyboardDoubleArrowDown, MdKeyboardDoubleArrowUp } from "react-icons/md";
 
 
 const PetMedicalRecord = ({ record, pet_id }) => {
@@ -19,7 +19,11 @@ const PetMedicalRecord = ({ record, pet_id }) => {
                 <Link to = {`${record.id}/edit`} state = { record }>
                     <button><MdEditSquare/></button>
                 </Link>
-                <button onClick={()=>handleMedicalDelete()}><MdDeleteForever /></button>
+                <button onClick={() => {
+                    const confirmBox = window.confirm("Do you really want to remove this record?");
+                    confirmBox ? handleMedicalDelete() : console.log('No')}}>
+                    <MdDeleteForever/>
+                </button>
                 <FileDownload record_id = { record.id } pet_id = { pet_id }/>
                 <FileUpload record_id = { record.id } pet_id = { pet_id } />
             </ul>
