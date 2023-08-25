@@ -16,7 +16,7 @@ def send_email(pet_name, last_deworm, recipient_email):
 
     subject = 'Reminder to deworm your pet'
     body = f"""
-            Your pet {pet_name} was last dewormed in {last_deworm}. Please get him deworm at your earliest convenience!
+            Your pet {pet_name} was last dewormed in {last_deworm}. Please have {pet_name} deworm at your earliest convenience!
             """
     em = EmailMessage()
     em['From'] = sender_email
@@ -29,11 +29,12 @@ def send_email(pet_name, last_deworm, recipient_email):
     with smtplib.SMTP_SSL('smtp.gmail.com', 465, context=context) as smtp:
         smtp.login(sender_email, email_password)
         smtp.sendmail(sender_email, recipient_email, em.as_string())
+        
 
 def send_flask_mail(pet_name, last_deworm, recipient_email):
-   msg = Message('Hello', sender = EMAIL, recipients = [recipient_email])
+   msg = Message('Deworm Reminder from Petbook!', sender = EMAIL, recipients = [recipient_email])
    msg.body = f"""
-            Your pet {pet_name} was last dewormed in {last_deworm}. Please get him deworm at your earliest convenience!
+            Your pet {pet_name} was last dewormed in {last_deworm}. Please have {pet_name} deworm at your earliest convenience!
             """
    mail.send(msg)
    return "Sent"

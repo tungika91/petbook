@@ -6,6 +6,7 @@ from extensions import db
 from flask_cors import cross_origin
 from auth_middleware import token_required
 from services.aws_s3 import allowed_file, get_unique_filename, upload_file_to_s3, get_image_url, get_medrec_url
+from services.email import send_email, send_flask_mail
 from datetime import datetime, timedelta
 import jwt
 import controller as dynamodb
@@ -174,6 +175,9 @@ def all_pets(current_user, user_id):
                             "pet_description":pet.pet_description,
                             "pet_age": datetime.now(tz=None).year - pet.pet_dob.year,
                             "profile_pic": image_urls[-1]}
+                if pet.deworm_reminder == True:
+                    # send_email(pet.pet_name, pet.last_deworm, user.email)
+                    send_flask_mail(pet.pet_name, pet.last_deworm, user.email)
                 all_pets.append(results)
             return all_pets
         
@@ -227,18 +231,16 @@ def pet(current_user, user_id, pet_id):
             return results
 
         if request.method == 'PATCH':
-
             try:
                 pet = Pet.query.filter(Pet.id==pet_id).one()
             except:
                 return jsonify({"response": "Pet Details not found"}), 404
-            print(request.json)
             if 'sterilised' in request.json:
                 pet.sterilised = request.json['sterilised']
             if 'pet_description' in request.json:
                 pet.pet_description = request.json['pet_description']
             if 'last_deworm' in request.json:
-                if datetime.strptime(request.json['last_deworm'], "%m-%d-%Y") + timedelta(days=90) > datetime.now(tz=None):
+                if datetime.strptime(request.json['last_deworm'], "%m-%d-%Y") + timedelta(days=30) >= datetime.now(tz=None):
                     deworm_reminder = 0
                 else:
                     deworm_reminder = 1
@@ -300,7 +302,7 @@ def register_pet(current_user, user_id):
     pet_age = datetime.now(tz=None).year - datetime.strptime(pet_dob, "%m-%d-%Y").year
 
     # Deworm reminder
-    if datetime.strptime(last_deworm, "%m-%d-%Y") + timedelta(days=90) > datetime.now(tz=None):
+    if datetime.strptime(last_deworm, "%m-%d-%Y") + timedelta(days=30) > datetime.now(tz=None):
         deworm_reminder = 0
     else:
         deworm_reminder = 1

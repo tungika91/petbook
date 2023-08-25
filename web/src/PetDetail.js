@@ -56,6 +56,7 @@ const PetDetail = () => {
                             <h2>{pet.pet_name}</h2>
                             <li className="postBody">Birthday: {pet.pet_dob.slice(0, 16)}</li>
                             <li className="postBody">Last deworm date: {pet.last_deworm.slice(0, 16)}</li>
+                            <li className="postBody">Time to deworm: {(pet.deworm_reminder) ? 'Yes': 'No'}</li>                           
                             <li className="postBody">Age: {pet.pet_age}</li>
                             <li className="postBody">Sterilised: {(pet.sterilised) ? 'Yes': 'No'}</li>
                             <li className="postBody">Pet Type: {pet.pet_type}</li>

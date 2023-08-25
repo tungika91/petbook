@@ -94,6 +94,7 @@ export const DataProvider = ({ children }) => {
                     }
                 });
                 setPets(response.data); // response.data is in json format
+                console.log(response.data)
 
             } catch (err) {
                 if (err.response) { // Not in the 200 response range
