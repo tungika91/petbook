@@ -158,7 +158,9 @@ def all_pets(current_user, user_id):
                 image_urls = []
                 images = Img.query.filter(Img.pet_id==pet.id).all()
                 if not images:
-                    return jsonify({"response": f"pet has no images"}), 404
+                    # continue
+                    # return jsonify({"response": f"pet has no images"}), 404
+                    image_urls.append('')
                 else:
                     for image in images:
                         results = get_image_url(AWS_S3_BUCKET, image.img_filename)
@@ -240,7 +242,7 @@ def pet(current_user, user_id, pet_id):
             if 'pet_description' in request.json:
                 pet.pet_description = request.json['pet_description']
             if 'last_deworm' in request.json:
-                if datetime.strptime(request.json['last_deworm'], "%m-%d-%Y") + timedelta(days=30) >= datetime.now(tz=None):
+                if datetime.strptime(request.json['last_deworm'][:10], "%Y-%m-%d") + timedelta(days=30) >= datetime.now(tz=None):
                     deworm_reminder = 0
                 else:
                     deworm_reminder = 1
@@ -299,10 +301,10 @@ def register_pet(current_user, user_id):
     pet_description = pet_data['pet_description']
 
     # Age
-    pet_age = datetime.now(tz=None).year - datetime.strptime(pet_dob, "%m-%d-%Y").year
+    pet_age = datetime.now(tz=None).year - datetime.strptime(pet_dob[:10], "%Y-%m-%d").year
 
     # Deworm reminder
-    if datetime.strptime(last_deworm, "%m-%d-%Y") + timedelta(days=30) > datetime.now(tz=None):
+    if datetime.strptime(last_deworm[:10], "%Y-%m-%d") + timedelta(days=30) > datetime.now(tz=None):
         deworm_reminder = 0
     else:
         deworm_reminder = 1
@@ -338,7 +340,6 @@ def upload(current_user, user_id, pet_id):
             return {"errors": "file type not permitted"}, 400
         
         image.filename = get_unique_filename(image.filename)
-        print(image.filename)
         upload = upload_file_to_s3(image)
         if "url" not in upload:
             # if the dictionary doesn't have a url key

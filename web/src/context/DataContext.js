@@ -23,7 +23,8 @@ export const DataProvider = ({ children }) => {
     const [petName, setPetName] = useState('');
     const [petType, setPetType] = useState('');
     const [dob, setDob] = useState('');
-    const [deworm, setDeworm] = useState(format(new Date(), 'M-d-y'));
+    // const [deworm, setDeworm] = useState(format(new Date(), 'M-d-y'));
+    const [deworm, setDeworm] = useState(new Date());
     const [gender, setGender] = useState('');
     const [ster, setSter] = useState('false');
     const [petDesc, setPetDesc] = useState('');

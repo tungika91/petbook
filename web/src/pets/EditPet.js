@@ -1,19 +1,22 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { useContext } from 'react';
 import DataContext from '../context/DataContext';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 export const EditPet = () => {
     const { pets, handleEdit, newPetName, setNewPetName, newPetType, setNewPetType, newDob, setNewDob, newDeworm, setNewDeworm, newGender, setNewGender, newSter, setNewSter, newPetDesc, setNewPetDesc } = useContext(DataContext);
-
     const { id } = useParams(); // extract the id from the link
     const pet = pets.find(pet => (pet.id).toString() === id);
+    const [ startDate, setStartDate ] = useState(new Date());
 
     function getDate(date) {
         var day = date.getDate();
         var month = date.getMonth()+1; // JS counts month from 0
         var year = date.getFullYear();
         var format = month + "-" + day + "-" + year;
+        console.log(format)
         return format
     };
 
@@ -22,8 +25,8 @@ export const EditPet = () => {
         if (pet) {
             setNewPetName(pet.pet_name);
             setNewPetType(pet.pet_type);
-            setNewDob(getDate(new Date(pet.pet_dob)));
-            setNewDeworm(getDate(new Date(pet.last_deworm)));
+            setNewDob(new Date(pet.pet_dob));
+            setNewDeworm(new Date(pet.last_deworm));
             setNewGender(pet.pet_gender);
             setNewSter(pet.sterilised.toString());
             setNewPetDesc(pet.pet_description);
@@ -61,21 +64,25 @@ export const EditPet = () => {
                             onChange={(e) => setNewGender(e.target.value)}
                         />
                         <label htmlFor="postTitle">Birthday (MM-DD-YYYY):</label>
-                        <input
+                        {/* <input
                             id="postTitle" // match with htmlFor attribute
                             type="text" // accept text input
                             required
                             value={newDob}
                             onChange={(e) => setNewDob(e.target.value)}
-                        />
+                        /> */}
+                        <DatePicker selected={newDob} onChange={(date) => setNewDob(date)} />
+
                         <label htmlFor="postTitle">Last Deworm Date (MM-DD-YYYY):</label>
-                        <input
+                        {/* <input
                             id="postTitle" // match with htmlFor attribute
                             type="text" // accept text input
                             required
                             value={newDeworm}
                             onChange={(e) => setNewDeworm(e.target.value)}
-                        />
+                        /> */}
+                        <DatePicker selected={newDeworm} onChange={(date) => setNewDeworm(date)} />
+
                         <label htmlFor="postTitle">Is your pet sterilised?</label>
                         <input
                             id="postTitle" // match with htmlFor attribute
