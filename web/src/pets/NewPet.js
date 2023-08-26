@@ -1,5 +1,7 @@
 import { useContext } from 'react';
 import DataContext from '../context/DataContext';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const NewPet = () => {
     const {handleSubmit, petName, setPetName, petType, setPetType, dob, setDob, deworm, setDeworm, gender, setGender, ster, setSter, petDesc, setPetDesc} = useContext(DataContext)
@@ -33,21 +35,25 @@ const NewPet = () => {
                     onChange={(e) => setGender(e.target.value)}
                 />
                 <label htmlFor="postTitle">Birthday (MM-DD-YYYY):</label>
-                <input
+                {/* <input
                     id="postTitle" // match with htmlFor attribute
                     type="text" // accept text input
                     required
                     value={dob}
                     onChange={(e) => setDob(e.target.value)}
-                />
+                /> */}
+                <DatePicker selected={ dob } onChange={(date) => setDob(date)} />
+
                 <label htmlFor="postTitle">Last Deworm Date (MM-DD-YYYY):</label>
-                <input
+                {/* <input
                     id="postTitle" // match with htmlFor attribute
                     type="text" // accept text input
                     required
                     value={deworm}
                     onChange={(e) => setDeworm(e.target.value)}
-                />
+                /> */}
+                <DatePicker selected={ deworm } onChange={(date) => setDeworm(date)} />
+
                 <label htmlFor="postTitle">Is your pet sterilised?</label>
                 <input
                     id="postTitle" // match with htmlFor attribute
