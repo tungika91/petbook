@@ -81,7 +81,6 @@ nbconvert==6.5.0
 nbformat==5.3.0
 nest-asyncio==1.5.5
 notebook==6.4.10
-numpy==1.22.3
 oauthlib==3.2.0
 openpyxl==3.0.10
 opt-einsum==3.3.0
@@ -104,15 +103,12 @@ PTable==0.9.2
 ptyprocess==0.7.0
 pure-eval==0.2.2
 py==1.11.0
-PyAlgoTrade==0.20
 pyarrow==9.0.0
 pyasn1==0.4.8
 pyasn1-modules==0.2.8
-PyAutoGUI==0.9.53
 pycparser==2.21
 pydeck==0.7.1
 pydot==1.4.2
-PyGetWindow==0.0.9
 Pygments==2.11.2
 PyJWT==2.6.0
 Pympler==1.0.1
@@ -179,7 +175,3 @@ Werkzeug==2.2.2
 widgetsnbextension==4.0.2
 wrapt==1.14.1
 ws4py==0.5.1
-yahoofinancials==1.6
-yarl==1.7.2
-yfinance==0.1.70
-zipp==3.8.1
