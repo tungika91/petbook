@@ -14,6 +14,8 @@ import uuid
 
 bp = Blueprint('users', __name__, url_prefix='/users')
 
+REMINDER_DAYS = 60
+
 # ------------------- REGISTRATION and LOGIN ------------------- #
 
 @bp.route('/register', methods = ['POST'])
@@ -242,7 +244,7 @@ def pet(current_user, user_id, pet_id):
             if 'pet_description' in request.json:
                 pet.pet_description = request.json['pet_description']
             if 'last_deworm' in request.json:
-                if datetime.strptime(request.json['last_deworm'][:10], "%Y-%m-%d") + timedelta(days=30) >= datetime.now(tz=None):
+                if datetime.strptime(request.json['last_deworm'][:10], "%Y-%m-%d") + timedelta(days=REMINDER_DAYS) >= datetime.now(tz=None):
                     deworm_reminder = 0
                 else:
                     deworm_reminder = 1
@@ -304,7 +306,7 @@ def register_pet(current_user, user_id):
     pet_age = datetime.now(tz=None).year - datetime.strptime(pet_dob[:10], "%Y-%m-%d").year
 
     # Deworm reminder
-    if datetime.strptime(last_deworm[:10], "%Y-%m-%d") + timedelta(days=30) > datetime.now(tz=None):
+    if datetime.strptime(last_deworm[:10], "%Y-%m-%d") + timedelta(days=REMINDER_DAYS) > datetime.now(tz=None):
         deworm_reminder = 0
     else:
         deworm_reminder = 1
