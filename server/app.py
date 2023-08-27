@@ -28,8 +28,8 @@ if __name__ == '__main__':
     app.run(debug=True)
 
 @app.route('/')
-# def index():
-#     return jsonify({"message":"Welcome to Petbook"})
+def index():
+    return jsonify({"message":"Welcome to Petbook"})
 
 def root_route():
    dynamodb.create_table_medical()
