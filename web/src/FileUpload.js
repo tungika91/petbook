@@ -1,7 +1,7 @@
 import { useContext } from "react"
 import { useState } from "react";
 import DataContext from './context/DataContext';
-import api from './api/posts';
+import api from './api/axios';
 import { MdOutlineFileUpload } from "react-icons/md";
 
 const FileUpload = ({ record_id, pet_id }) => {
