@@ -1,7 +1,7 @@
 import { Link, useParams } from "react-router-dom";
 import { useContext, useEffect } from 'react';
 import DataContext from '../context/DataContext';
-import api from '../api/posts';
+import api from '../api/axios';
 import PetMedicalRecord from "./PetMedicalRecord";
 
 const PetMedical = () => {

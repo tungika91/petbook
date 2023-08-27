@@ -1,7 +1,7 @@
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useContext, useState } from 'react';
 import DataContext from '../context/DataContext';
-import api from '../api/posts';
+import api from '../api/axios';
 import FileUpload from "../FileUpload";
 import FileDownload from '../FileDownload';
 import { MdDeleteForever, MdEditSquare, MdKeyboardDoubleArrowDown, MdKeyboardDoubleArrowUp } from "react-icons/md";
