@@ -1,6 +1,6 @@
 import { useContext } from "react"
 import DataContext from './context/DataContext';
-import api from './api/axios';
+import api from './api/posts';
 import { MdOutlineFileDownload } from "react-icons/md";
 import React from 'react';
 

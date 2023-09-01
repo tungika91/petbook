@@ -1,7 +1,7 @@
 import { useContext } from "react"
 import { useState } from "react";
 import DataContext from './context/DataContext';
-import api from './api/axios';
+import api from './api/posts';
 import { MdOutlineFileUpload } from "react-icons/md";
 import React from 'react';
 
