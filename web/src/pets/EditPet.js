@@ -11,15 +11,6 @@ export const EditPet = () => {
     const { id } = useParams(); // extract the id from the link
     const pet = pets.find(pet => (pet.id).toString() === id);
 
-    // function getDate(date) {
-    //     var day = date.getDate();
-    //     var month = date.getMonth()+1; // JS counts month from 0
-    //     var year = date.getFullYear();
-    //     var format = month + "-" + day + "-" + year;
-    //     console.log(format)
-    //     return format
-    // };
-
     useEffect(() => {
         // To pre-fill the form with existing info
         if (pet) {
@@ -63,10 +54,10 @@ export const EditPet = () => {
                             value={newGender}
                             onChange={(e) => setNewGender(e.target.value)}
                         />
-                        <label htmlFor="postTitle">Birthday (MM-DD-YYYY):</label>
+                        <label htmlFor="postTitle">Birthday (MM/DD/YYYY):</label>
                         <DatePicker selected={newDob} onChange={(date) => setNewDob(date)} />
 
-                        <label htmlFor="postTitle">Last Deworm Date (MM-DD-YYYY):</label>
+                        <label htmlFor="postTitle">Last Deworm Date (MM/DD/YYYY):</label>
                         <DatePicker selected={newDeworm} onChange={(date) => setNewDeworm(date)} />
 
                         <label htmlFor="postTitle">Is your pet sterilised?</label>
