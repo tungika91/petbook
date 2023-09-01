@@ -13,6 +13,7 @@ import { Route, Routes } from 'react-router-dom';
 import { DataProvider } from './context/DataContext';
 import EditPetMedicalRecord from './medicals/EditPetMedicalRecord';
 import NewPetMedicalRecord from './medicals/NewPetMedicalRecord';
+import React from 'react';
 
 function App() {
   return (

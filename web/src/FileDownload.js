@@ -2,6 +2,7 @@ import { useContext } from "react"
 import DataContext from './context/DataContext';
 import api from './api/axios';
 import { MdOutlineFileDownload } from "react-icons/md";
+import React from 'react';
 
 const FileDownload = ({ record_id, pet_id }) => {
     const { userID, auth } = useContext(DataContext);

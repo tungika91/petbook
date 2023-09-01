@@ -3,6 +3,7 @@ import { useParams, Link, useNavigate, useLocation } from "react-router-dom";
 import { useContext } from 'react';
 import DataContext from '../context/DataContext';
 import api from '../api/axios';
+import React from 'react';
 
 export const EditPetMedicalRecord = () => {
     const navigate = useNavigate();

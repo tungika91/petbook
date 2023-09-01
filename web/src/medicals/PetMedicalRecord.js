@@ -5,7 +5,7 @@ import api from '../api/axios';
 import FileUpload from "../FileUpload";
 import FileDownload from '../FileDownload';
 import { MdDeleteForever, MdEditSquare, MdKeyboardDoubleArrowDown, MdKeyboardDoubleArrowUp } from "react-icons/md";
-
+import React from 'react';
 
 const PetMedicalRecord = ({ record, pet_id }) => {
     const { userID, auth } = useContext(DataContext);

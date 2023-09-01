@@ -1,4 +1,5 @@
 import Pet from './Pet';
+import React from 'react';
 
 const PetList = ({ pets }) => {
     return (

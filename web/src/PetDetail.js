@@ -4,6 +4,7 @@ import DataContext from './context/DataContext';
 import ImageUpload from "./ImageUpload";
 import styled from "styled-components";
 import { MdDeleteForever, MdEditSquare, MdMedicalInformation } from "react-icons/md";
+import React from 'react';
 
 // -------------- CSS Style -------------- //
 const Button1 = styled.button`

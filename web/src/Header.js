@@ -1,4 +1,5 @@
 import { MdAccountCircle } from "react-icons/md";
+import React from 'react';
 
 const Header = ({ title, user }) => {
     return (

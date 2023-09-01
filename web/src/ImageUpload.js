@@ -3,7 +3,7 @@ import { useState } from "react";
 import DataContext from './context/DataContext';
 import api from './api/axios';
 import { MdOutlineFileUpload } from "react-icons/md";
-
+import React from 'react';
 
 const ImageUpload = ({ pet_id }) => {
     const { userID, auth, navigate } = useContext(DataContext);

@@ -1,10 +1,10 @@
 import { useRef, useState, useEffect, useContext } from 'react';
 import DataContext from '../context/DataContext';
 import { useNavigate } from 'react-router-dom';
-
+import React from 'react';
 import axios from '../api/axios';
-const REGISTER_URL = '/register';
 
+const REGISTER_URL = '/register';
 const Register = () => {
     // const { setAuth } = useContext(AuthContext);
     const userRef = useRef();

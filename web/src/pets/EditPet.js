@@ -4,6 +4,7 @@ import { useContext } from 'react';
 import DataContext from '../context/DataContext';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import React from 'react';
 
 export const EditPet = () => {
     const { pets, handleEdit, newPetName, setNewPetName, newPetType, setNewPetType, newDob, setNewDob, newDeworm, setNewDeworm, newGender, setNewGender, newSter, setNewSter, newPetDesc, setNewPetDesc } = useContext(DataContext);

@@ -4,6 +4,7 @@ import Footer from './Footer';
 import { Outlet } from 'react-router-dom';
 import { useContext } from 'react';
 import DataContext from './context/DataContext';
+import React from 'react';
 
 const Layout = () => {
     const { user } = useContext(DataContext);

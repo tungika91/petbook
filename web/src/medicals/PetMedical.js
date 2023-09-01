@@ -3,6 +3,7 @@ import { useContext, useEffect } from 'react';
 import DataContext from '../context/DataContext';
 import api from '../api/axios';
 import PetMedicalRecord from "./PetMedicalRecord";
+import React from 'react';
 
 const PetMedical = () => {
     const { pets, userID, auth, medicalRecord, setMedicalRecord } = useContext(DataContext);

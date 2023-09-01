@@ -1,5 +1,6 @@
 // CUSTOM HOOKS for Window resize
 import { useState, useEffect } from 'react';
+
 // define object useWindowSize
 const useWindowSize = () => {
     const [windowSize, setWindowSize] = useState({
