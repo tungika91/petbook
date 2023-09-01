@@ -1,3 +1,4 @@
+import React from 'react';
 import { useContext } from 'react';
 import DataContext from '../context/DataContext';
 import DatePicker from "react-datepicker";
